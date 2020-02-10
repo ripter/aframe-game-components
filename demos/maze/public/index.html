@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="./index.css"></link>
+  <script src="./libs/aframe-v1.0.3.min.js"></script>
+  <script src="./bundle.js"></script>
+  <title>Maze Demo [A-FRAME 1.0.3]</title>
+</head>
+<body>
+  <a-scene
+    background="color: #ECECEC;"
+    click-to-select="elmIndicator: #elmSelectIndicator; componentName: user-controls;"
+    collision="renderBox: true;"
+    >
+    <a-assets>
+      <!-- Model includes alien skin texture and two animations, Idle, and Punch. -->
+      <a-asset-item id="model" src="./assets/characterMedium.glb"></a-asset-item>
+      <img id="skin" src="./assets/athleteFemaleBlue.png"></img>
+      <img id="textureGrass" src="./assets/Fabric_10.jpg"></img>
+    </a-assets>
+
+
+    <a-entity id="elm" class="clickable collidable"
+      anim-mixer
+      click-to-select
+      gltf-model-2="#model"
+      material="src: #skin"
+      position="0 0 -5"
+      user-controls="enabled: false;"
+      collision="size: 1 3 1; offset: 0 0 0;"
+      >
+    </a-entity>
+
+
+    <a-entity id="elmSelectIndicator" geometry="primitive: octahedron; radius: 0.25" material="color: #FFDC00;" position="0 -900 0"></a-entity>
+
+
+
+    <a-entity id="rig-camera" position="0 1.8 1">
+      <a-camera id="camera" wasd-controls-enabled="false">
+        <a-entity
+          cursor="rayOrigin: mouse;"
+          position="0 0 -1"
+          raycaster="objects: .clickable"
+          >
+        </a-entity>
+      </a-camera>
+    </a-entity>
+
+
+    <a-entity id="maze" position="0 0 0">
+      <a-box
+        position="-1 0.5 -3"
+        color="#4CC3D9"
+        collision=""
+        >
+      </a-box>
+    </a-entity>
+
+
+    <a-plane rotation="-90 0 0" width="24" height="20"
+      color="#7BC8A4" src="#textureGrass">
+    </a-plane>
+  </a-scene>
+</body>
+</html>
