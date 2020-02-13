@@ -1,9 +1,12 @@
 
+// Define all known keys.
 export const Key = {
-  Forward: 'key_forward',
-  Backward: 'key_backward',
-  TurnLeft: 'key_turn_left',
-  TurnRight: 'key_turn_right',
+  Forward: 'Key.Forward',
+  Backward: 'Key.Backward',
+  TurnLeft: 'Key.Turn.Left',
+  TurnRight: 'Key.Turn.Right',
+  PanLeft: 'Key.Camera.Pan.Left',
+  PanRight: 'Key.Camera.Pan.Right',
 };
 
 /**
@@ -18,4 +21,6 @@ export const KEY_MAP = {
   KeyA: Key.TurnLeft,
   ArrowRight: Key.TurnRight,
   KeyD: Key.TurnRight,
+  KeyQ: Key.PanLeft,
+  KeyE: Key.PanRight,
 };

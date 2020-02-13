@@ -1,4 +1,5 @@
-import { KEY_MAP } from '../consts/key_map';
+
+import { KEY_MAP } from './key_map';
 
 /**
  * Maps key presses to InputAction, allowsing components to repond to user input.

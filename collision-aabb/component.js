@@ -42,15 +42,13 @@ AFRAME.registerComponent('collision', {
 
     // Copy the geometry's boundingBox so we can find the entity's center in world space.
     box.copy(mesh.geometry.boundingBox);
-    // Our custom size/position for the collision box.
+    // Place our custom box at the center of the boundingBox
     box.getCenter(center);
     box.setFromCenterAndSize(center, size);
     box.translate(offset);
 
-    // Lastly, Apply the position/rotation to match the Mesh.
-    matrix.extractRotation(mesh.matrixWorld);
-    matrix.copyPosition(mesh.matrixWorld);
-    box.applyMatrix4(matrix);
+    // Lastly, Apply the position/rotation/scale on the box to match the Mesh.
+    box.applyMatrix4(mesh.matrixWorld);
   },
 
   /**

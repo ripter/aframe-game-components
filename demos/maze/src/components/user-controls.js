@@ -1,4 +1,3 @@
-import { Key } from '../consts/key_map';
 import { readKeysAsRocker } from '../utils/readKeysAsRocker';
 
 /**
@@ -10,6 +9,10 @@ AFRAME.registerComponent('user-controls', {
     speed: { default: 0.05 },
     clipWalk: { default: 'Walk' },
     clipIdle: { default: 'Idle' },
+    keyForward: { default: 'Key.Forward' },
+    keyBackward: { default: 'Key.Backward' },
+    keyTurnLeft: { default: 'Key.Turn.Left' },
+    keyTurnRight: { default: 'Key.Turn.Right' },
   },
 
   /**
@@ -62,14 +65,14 @@ AFRAME.registerComponent('user-controls', {
 
     return function readUserInput() {
       const { isKeyDown } = this;
-      const { speed } = this.data;
+      const { speed, keyForward, keyBackward, keyTurnLeft, keyTurnRight } = this.data;
 
       // Reset the velocity back to 0
       velocity.set(0, 0, 0);
 
       // Create a rocker style switch with two Keys.
-      velocity.z = readKeysAsRocker(isKeyDown, Key.Forward, Key.Backward) * speed;
-      rotation.y = readKeysAsRocker(isKeyDown, Key.TurnLeft, Key.TurnRight) * speed;
+      velocity.z = readKeysAsRocker(isKeyDown, keyForward, keyBackward) * speed;
+      rotation.y = readKeysAsRocker(isKeyDown, keyTurnLeft, keyTurnRight) * speed;
 
       return {
         velocity,
