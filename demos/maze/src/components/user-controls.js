@@ -40,6 +40,8 @@ AFRAME.registerComponent('user-controls', {
    */
   tick() {
     if (!this.data.enabled) { return; } // bail if not enabled
+    if (!this.el.getObject3D('mesh') || !this.el.getObject3D('armature')) { return; }
+
     const { el } = this;
     const { velocity, rotation } = this.readUserInput();
 

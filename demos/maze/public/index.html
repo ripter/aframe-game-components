@@ -30,7 +30,7 @@
       gltf-model-2="#model"
       material="src: #skin"
       position="0 0 -5"
-      user-controls="enabled: false;"
+      user-controls="enabled: true;"
       collision="size: 1 3 1; offset: 0 0 0;"
       >
     </a-entity>
@@ -41,7 +41,7 @@
 
 
     <a-entity id="rig-camera" camera-orbit="target: #elm; offset: 0 2 3">
-      <a-camera id="camera" position="0 1.8 1" wasd-controls-enabled="false">
+      <a-camera id="camera" wasd-controls-enabled="false">
         <a-entity
           cursor="rayOrigin: mouse;"
           position="0 0 -1"
