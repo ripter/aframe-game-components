@@ -22,6 +22,7 @@ AFRAME.registerComponent('camera-orbit', {
 
     this.tmpMatrix = new THREE.Matrix4();
     this.tmpVector = new THREE.Vector3();
+    this.thetaDeg = 0;
 
     // Bind methods from systems to make it easy to call them.
     this.isKeyDown = input.isKeyDown.bind(input);
@@ -60,11 +61,13 @@ AFRAME.registerComponent('camera-orbit', {
     // tmpMatrix.makeTranslation(offset.x, offset.y, offset.z);
 
     if (isKeyDown(keyPanLeft)) {
-      console.log('Pan Left!');
+      // Rotate the position and the rotation, so the camera continues to face the same direction.
+      this.thetaDeg += 1;
       this.el.object3D.rotation.y += THREE.Math.degToRad(1);
     }
     else if (isKeyDown(keyPanRight)) {
-      console.log('Pan Right!');
+      // Rotate the position and the rotation, so the camera continues to face the same direction.
+      this.thetaDeg -= 1;
       this.el.object3D.rotation.y -= THREE.Math.degToRad(1);
     }
     else {
@@ -76,15 +79,17 @@ AFRAME.registerComponent('camera-orbit', {
 
 
     // Add offset.
-    this.el.object3D.position.add(offset);
+    // this.el.object3D.position.add(offset);
 
 
-    
+
     // this.el.object3D.lookAt(target.object3D.position);
 
-    // tmpVector.setFromSphericalCoords(9, THREE.Math.degToRad(0), THREE.Math.degToRad(90));
+    // tmpVector.setFromSphericalCoords(4, THREE.Math.degToRad(80), THREE.Math.degToRad(0));
+    // console.log('tmpVector', tmpVector);
+    tmpVector.setFromCylindricalCoords(4, THREE.Math.degToRad(this.thetaDeg), 3);
 
-    // this.el.object3D.position.add(tmpVector);
+    this.el.object3D.position.add(tmpVector);
     // this.el.object3D.lookAt(target.object3D.position);
 
     // this.el.object3D.applyMatrix(tmpMatrix);
