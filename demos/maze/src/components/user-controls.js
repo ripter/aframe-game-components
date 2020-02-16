@@ -28,6 +28,7 @@ AFRAME.registerComponent('user-controls', {
     this.isKeyDown = input.isKeyDown.bind(input);
     this.playAnimation = animMixer.playAction.bind(animMixer);
     this.willCollide = collision.willCollide.bind(collision);
+    this.getCollision = collision.getCollisionBoxes.bind(collision);
   },
 
   /**
@@ -101,13 +102,47 @@ AFRAME.registerComponent('user-controls', {
    * Updates the velocity refrence if there are collisins.
   */
   updateVelocityFromCollisions(velocity) {
-    const { el, willCollide } = this;
+    const { el, willCollide, getCollision } = this;
     const collidedEl = willCollide(el, velocity);
+    if (!collidedEl) { return velocity; }
+    const [boxA, boxB] = getCollision(el, collidedEl);
 
-    if (collidedEl !== null) {
-      if (velocity.z > 0) {
-        velocity.z = 0;
-      }
+    // Skip if we are not trying to move
+    if (velocity.x === 0 && velocity.y === 0 && velocity.z === 0) {
+      return velocity;
+    }
+
+    // Convert the local velocity into world velocity.
+    const velocityWorld = new THREE.Vector3();
+    velocityWorld.copy(velocity);
+    velocityWorld.applyQuaternion(el.object3D.quaternion);
+    // use the world velocity to figure out which world direction we are moving
+    const isMovingEast = velocityWorld.x > 0;
+    const isMovingWest = velocityWorld.x < 0;
+    const isMovingNorth = velocityWorld.z < 0;
+    const isMovingSouth = velocityWorld.z > 0;
+
+
+    // Figure out which direction the collision is on.
+    const isCollisionSouth = boxA.min.z < boxB.min.z;
+    const isCollisionNorth = boxA.max.z > boxB.max.z;
+    const isCollisionEast = boxA.min.x < boxB.min.x;
+    const isCollisionWest = boxA.max.x > boxB.max.x;
+
+
+    // Don't allow moving into the collision.
+    if (isMovingNorth && isCollisionNorth) {
+      velocity.z = 0;
+    }
+    else if (isMovingSouth && isCollisionSouth) {
+      velocity.z = 0;
+    }
+
+    if (isMovingEast && isCollisionEast) {
+      velocity.z = 0;
+    }
+    else if (isMovingWest && isCollisionWest) {
+      velocity.z = 0;
     }
 
     return velocity;

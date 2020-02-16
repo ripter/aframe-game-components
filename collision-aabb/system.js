@@ -62,12 +62,13 @@ AFRAME.registerSystem('collision', {
   },
 
   /**
-   * returns the [intersect](https://threejs.org/docs/index.html#api/en/math/Box3.intersect) of the two entity's colliding boxes.
+   * [intersect](https://threejs.org/docs/index.html#api/en/math/Box3.intersect)
+   * Returns an array, [intersect, boxA, boxB]
   */
-  intersection(entityA, entityB) {
+  getCollisionBoxes(entityA, entityB) {
     const { entityBoxes } = this;
     const boxA = entityBoxes.get(entityA);
     const boxB = entityBoxes.get(entityB);
-    return boxA.intersect(boxB);
+    return [boxA, boxB];
   },
 });

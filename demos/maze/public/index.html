@@ -11,9 +11,10 @@
 </head>
 <body>
   <a-scene
+    stats
     background="color: #ECECEC;"
     click-to-select="elmIndicator: #elmSelectIndicator; componentName: user-controls;"
-    collision="renderBox: true;"
+    collision="renderBox: false;"
     >
     <a-assets>
       <!-- Model includes alien skin texture and two animations, Idle, and Punch. -->
@@ -24,7 +25,7 @@
     </a-assets>
 
 
-    <a-entity id="elm" class="clickable collidable"
+    <a-entity id="elm" class=""
       anim-mixer
       click-to-select
       gltf-model-2="#model"
