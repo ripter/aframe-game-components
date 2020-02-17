@@ -3,8 +3,25 @@
 */
 AFRAME.registerComponent('collision', {
   schema: {
-    size: { type: 'vec3', default: { x: 1, y: 1, z: 1 } },
+    size: { type: 'vec3', default: { x: 0, y: 0, z: 0 } },
     offset: { type: 'vec3', default: { x: 0, y: 0, z: 0 } },
+  },
+
+  /**
+   * Update handler. Similar to attributeChangedCallback.
+   * Called whenever component's data changes.
+   * Also called on component initialization when the component receives initial data.
+   *
+   * @param {object} prevData - Previous attributes of the component.
+   */
+  update(prevData) {
+    const { size } = this.data;
+    if (size.x === 0 && size.y === 0 && size.z === 0) {
+      this.useCustomSize = false;
+    }
+    else {
+      this.useCustomSize = true;
+    }
   },
 
   /**
@@ -13,12 +30,14 @@ AFRAME.registerComponent('collision', {
    * Components can use this to set initial state.
   */
   init() {
+    this.useCustomSize = false;
     this.box = new THREE.Box3();
     this.center = new THREE.Vector3();
     this.matrix = new THREE.Matrix4();
 
     // Register our box in the collision system.
     this.system.add(this.el, this.box);
+    // this.update();
   },
 
   /**
@@ -33,7 +52,7 @@ AFRAME.registerComponent('collision', {
     const mesh = this.el.getObject3D('mesh');
     if (!mesh) { return; }
     const { size, offset } = this.data;
-    const { box, center, matrix } = this;
+    const { box, center, matrix, useCustomSize } = this;
 
     // Use the geometry's bounding box, creating it if needed.
     if (!mesh.geometry.boundingBox) {
@@ -42,11 +61,14 @@ AFRAME.registerComponent('collision', {
 
     // Copy the geometry's boundingBox so we can find the entity's center in world space.
     box.copy(mesh.geometry.boundingBox);
-    // Place our custom box at the center of the boundingBox
-    box.getCenter(center);
-    box.setFromCenterAndSize(center, size);
-    box.translate(offset);
 
+    if (useCustomSize) {
+      // Place our custom box at the center of the boundingBox
+      box.getCenter(center);
+      box.setFromCenterAndSize(center, size);
+    }
+    // Apply the translation
+    box.translate(offset);
     // Lastly, Apply the position/rotation/scale on the box to match the Mesh.
     box.applyMatrix4(mesh.matrixWorld);
   },

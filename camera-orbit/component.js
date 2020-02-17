@@ -36,10 +36,10 @@ AFRAME.registerComponent('camera-orbit', {
    * @param {object} prevData - Previous attributes of the component.
    */
   update(prevData) {
-    console.group('camera-orbit.update');
-    console.log('prevData', prevData);
-    console.log('data', this.data);
-    console.groupEnd();
+    // console.group('camera-orbit.update');
+    // console.log('prevData', prevData);
+    // console.log('data', this.data);
+    // console.groupEnd();
   },
 
   /**
@@ -55,11 +55,6 @@ AFRAME.registerComponent('camera-orbit', {
     const { target, offset, keyPanLeft, keyPanRight } = this.data;
     if (!target || !target.object3D) { return; }
 
-    // tmpMatrix.copy(target.object3D.matrixWorld);
-    // tmpMatrix.makeTranslation(1, 1, 1);
-    // tmpMatrix.setPosition(offset);
-    // tmpMatrix.makeTranslation(offset.x, offset.y, offset.z);
-
     if (isKeyDown(keyPanLeft)) {
       // Rotate the position and the rotation, so the camera continues to face the same direction.
       this.thetaDeg += 1;
@@ -70,42 +65,13 @@ AFRAME.registerComponent('camera-orbit', {
       this.thetaDeg -= 1;
       this.el.object3D.rotation.y -= THREE.Math.degToRad(1);
     }
-    else {
-
-    }
 
     // Start by centering on the target.
     this.el.object3D.position.copy(target.object3D.position);
 
-
-    // Add offset.
-    // this.el.object3D.position.add(offset);
-
-
-
-    // this.el.object3D.lookAt(target.object3D.position);
-
-    // tmpVector.setFromSphericalCoords(4, THREE.Math.degToRad(80), THREE.Math.degToRad(0));
-    // console.log('tmpVector', tmpVector);
     tmpVector.setFromCylindricalCoords(4, THREE.Math.degToRad(this.thetaDeg), 3);
 
     this.el.object3D.position.add(tmpVector);
-    // this.el.object3D.lookAt(target.object3D.position);
-
-    // this.el.object3D.applyMatrix(tmpMatrix);
-
-    // tmpVector.copy(target.object3D.position);
-
-    // this.el.object3D.position.copy(target.object3D.position);
-    // this.el.object3D.position.add(tmpVector);
-
-    // this.el.object3D.position.z += 3;
-    // this.el.object3D.position.setFromSphericalCoords(3, 0, THREE.Math.degToRad(90));
-
-    // this.el.object3D.lookAt(target.object3D.position);
-    // this.el.object3D.position.copy(tmpVector);
-  // PanLeft: 'Key.Camera.Pan.Left',
-  // PanRight: 'Key.Camera.Pan.Right',
   },
 
   /**
