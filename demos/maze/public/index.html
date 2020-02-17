@@ -14,7 +14,7 @@
     stats
     background="color: #ECECEC;"
     click-to-select="elmIndicator: #elmSelectIndicator; componentName: user-controls;"
-    collision="renderBox: true;"
+    collision="renderBox: false;"
     >
     <a-assets>
       <!-- Model includes alien skin texture and two animations, Idle, and Punch. -->
@@ -23,12 +23,19 @@
       <img id="textureGrass" src="./assets/Fabric_10.jpg"></img>
 
       <!-- Set Pieces -->
+      <a-asset-item id="setVaultDoor01" src="./assets/set/VaultDoor_Frame_01.glb"></a-asset-item>
+      <a-asset-item id="setVaultGateDoor01" src="./assets/set/VaultGate_Door_01.glb"></a-asset-item>
+      <a-asset-item id="setVaultGateFrame01" src="./assets/set/VaultGate_Frame_01.glb"></a-asset-item>
+      <a-asset-item id="setVaultGateWall01" src="./assets/set/VaultGate_Wall_01.glb"></a-asset-item>
       <a-asset-item id="setWallExterior01" src="./assets/set/Wall_Exterior_01.glb"></a-asset-item>
-      <a-asset-item id="setWallInterior01" src="./assets/set/Wall_Interior_01.glb"></a-asset-item>
-      <a-asset-item id="setWallExteriorGround01" src="./assets/set/Wall_Exterior_Ground_01.glb"></a-asset-item>
-      <a-asset-item id="setWallInteriorGround01" src="./assets/set/Wall_Interior_Ground_01.glb"></a-asset-item>
+      <a-asset-item id="setWallExteriorDoor01" src="./assets/set/Wall_Exterior_Door_01.glb"></a-asset-item>
       <a-asset-item id="setWallExteriorDoubleDoor" src="./assets/set/Wall_Exterior_DoubleDoor_01.glb"></a-asset-item>
+      <a-asset-item id="setWallExteriorGround01" src="./assets/set/Wall_Exterior_Ground_01.glb"></a-asset-item>
+      <a-asset-item id="setWallExteriorWindow01" src="./assets/set/Wall_Exterior_Window_01.glb"></a-asset-item>
+      <a-asset-item id="setWallExteriorWindow02" src="./assets/set/Wall_Exterior_Window_02.glb"></a-asset-item>
+      <a-asset-item id="setWallInterior01" src="./assets/set/Wall_Interior_01.glb"></a-asset-item>
       <a-asset-item id="setWallInteriorDoubleDoor" src="./assets/set/Wall_Interior_DoubleDoor_01.glb"></a-asset-item>
+      <a-asset-item id="setWallInteriorGround01" src="./assets/set/Wall_Interior_Ground_01.glb"></a-asset-item>
     </a-assets>
 
 
@@ -61,7 +68,19 @@
 
 
     <a-entity id="maze" position="0 0 0" scale="2 2 2">
-      <a-entity id="roomA">
+
+      <a-entity id="vault" position="0 0 0">
+        <a-entity position="-2 0 -5" rotation="0 -90 0" gltf-model-2="#setVaultDoor01"></a-entity>
+        <a-entity position="-2 0 -5" rotation="0 -90 0" gltf-model-2="#setVaultGateFrame01"></a-entity>
+        <a-entity position="-1.94396 0 -1.77902" rotation="0 -90 0" gltf-model-2="./assets/set/VaultGate_Door_01.glb"></a-entity>
+
+        <a-entity position="4 0 -5" rotation="0 -90 0" gltf-model-2="#setVaultGateWall01"></a-entity>
+        <a-entity position="2 0 -5" rotation="0 -90 0" gltf-model-2="#setWallExteriorWindow02"></a-entity>
+
+
+      </a-entity>
+
+      <a-entity id="roomA" position="0 0 11">
         <!-- Inside Walls -->
         <a-entity position="3 0 0" rotation="0 180 0" collision="" gltf-model-2="#setWallInteriorGround01"></a-entity>
         <a-entity position="-2 0 0" rotation="0 90 0" collision="" gltf-model-2="#setWallInteriorGround01"></a-entity>
