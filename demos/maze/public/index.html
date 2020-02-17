@@ -14,7 +14,7 @@
     stats
     background="color: #ECECEC;"
     click-to-select="elmIndicator: #elmSelectIndicator; componentName: user-controls;"
-    collision="renderBox: false;"
+    collision="renderBox: true;"
     >
     <a-assets>
       <!-- Model includes alien skin texture and two animations, Idle, and Punch. -->
@@ -23,8 +23,12 @@
       <img id="textureGrass" src="./assets/Fabric_10.jpg"></img>
 
       <!-- Set Pieces -->
-      <a-asset-item id="setWallGround01" src="./assets/set/Wall_Exterior_Ground_01.glb"></a-asset-item>
-      <a-asset-item id="setWallDoubleDoor" src="./assets/set/Wall_Exterior_DoubleDoor_01.glb"></a-asset-item>
+      <a-asset-item id="setWallExterior01" src="./assets/set/Wall_Exterior_01.glb"></a-asset-item>
+      <a-asset-item id="setWallInterior01" src="./assets/set/Wall_Interior_01.glb"></a-asset-item>
+      <a-asset-item id="setWallExteriorGround01" src="./assets/set/Wall_Exterior_Ground_01.glb"></a-asset-item>
+      <a-asset-item id="setWallInteriorGround01" src="./assets/set/Wall_Interior_Ground_01.glb"></a-asset-item>
+      <a-asset-item id="setWallExteriorDoubleDoor" src="./assets/set/Wall_Exterior_DoubleDoor_01.glb"></a-asset-item>
+      <a-asset-item id="setWallInteriorDoubleDoor" src="./assets/set/Wall_Interior_DoubleDoor_01.glb"></a-asset-item>
     </a-assets>
 
 
@@ -56,24 +60,25 @@
     </a-entity>
 
 
-    <a-entity id="maze" position="0 0.5 0" scale="2 2 2">
-      <a-entity id="roomA" position="0 -0.5 0">
-        <a-entity position="2.5 0 0" rotation="0 180 0" collision="" gltf-model-2="#setWallGround01"></a-entity>
-        <a-entity position="-2.5 0 0" rotation="0 90 0" collision="" gltf-model-2="#setWallGround01"></a-entity>
-        <a-entity position="2.5 0 -5" rotation="0 -90 0" collision="" gltf-model-2="#setWallGround01"></a-entity>
-        <a-entity
-          position="1.5 0 -4.5"
-          geometry="primitive: box; width: 2; height: 1; depth: 2;"
-          collision=""
-          material="color: #4CC3D9;"
-          ></a-entity>
-        <a-entity position="3.5 0 -4" geometry="primitive: box; width: 2; height: 1; depth: 3;" collision="" material="color: #4CC3D9;"></a-entity>
-        <a-entity position="-1.5 0 -4.5" geometry="primitive: box; width: 2; height: 1; depth: 2;" collision="" material="color: #4CC3D9;"></a-entity>
-        <a-entity position="-3.5 0 -4" geometry="primitive: box; width: 2; height: 1; depth: 3;" collision="" material="color: #4CC3D9;"></a-entity>
-        <a-entity position="-2.5 0 -5" rotation="0 0 0" gltf-model-2="#setWallDoubleDoor"></a-entity>
+    <a-entity id="maze" position="0 0 0" scale="2 2 2">
+      <a-entity id="roomA">
+        <!-- Inside Walls -->
+        <a-entity position="3 0 0" rotation="0 180 0" collision="" gltf-model-2="#setWallInteriorGround01"></a-entity>
+        <a-entity position="-2 0 0" rotation="0 90 0" collision="" gltf-model-2="#setWallInteriorGround01"></a-entity>
+        <a-entity position="3 0 -5" rotation="0 -90 0" collision="" gltf-model-2="#setWallInteriorGround01"></a-entity>
+        <a-entity position="-2 0 -5" rotation="0 0 0" gltf-model-2="#setWallInteriorDoubleDoor"></a-entity>
+        <!-- Outside Walls -->
+        <a-entity position="-2 0 0" rotation="0 0 0" collision="" gltf-model-2="#setWallExteriorGround01"></a-entity>
+        <a-entity position="-2 0 -5" rotation="0 -90 0" collision="" gltf-model-2="#setWallExteriorGround01"></a-entity>
+        <a-entity position="3 0 0" rotation="0 90 0" collision="" gltf-model-2="#setWallExteriorGround01"></a-entity>
+        <a-entity position="3 0 -5" rotation="0 180 0" gltf-model-2="#setWallExteriorDoubleDoor"></a-entity>
+        <!-- Door Coliisions -->
+        <a-entity position="-1.5 1 -5" geometry="width: 1.25; height: 2; depth: 0.25" collision="" material="visible: false; color: #4CC3D9"></a-entity>
+        <a-entity position="2.5 1 -5" geometry="width: 1.25; height: 2; depth: 0.25" collision="" material="visible: false; color: #4CC3D9"></a-entity>
       </a-entity>
 
       <a-entity id="roomB">
+
         <a-entity position="-8 0 -1.5" geometry="primitive: box; width: 1; height: 1; depth: 4;" collision="size: 1 1 4;" material="color: #4CC3D9;"></a-entity>
         <a-entity position="-9 0 0" geometry="primitive: box; width: 1; height: 1; depth: 1;" collision="size: 1 1 1;" material="color: #4CC3D9;"></a-entity>
         <a-entity position="-8.5 0 -4.5" geometry="primitive: box; width: 2; height: 1; depth: 2;" collision="size: 2 1 2;" material="color: #4CC3D9;"></a-entity>
@@ -121,25 +126,34 @@
       </a-entity>
 
       <a-entity id="outsideWall">
-        <a-entity position="-5 0 2" geometry="primitive: box; width: 19; height: 1; depth: 1;" collision="size: 19 1 1;" material="color: #4CC3D9;"></a-entity>
-        <a-entity position="-5 0 0" geometry="primitive: box; width: 3; height: 1; depth: 3;" collision="size: 3 1 3;" material="color: #4CC3D9;"></a-entity>
-        <a-entity position="4 0 0" geometry="primitive: box; width: 1; height: 1; depth: 3;" collision="size: 1 1 3;" material="color: #4CC3D9;"></a-entity>
-        <a-entity position="7.5 0 -1" geometry="primitive: box; width: 6; height: 1; depth: 1;" collision="size: 6 1 1;" material="color: #4CC3D9;"></a-entity>
-        <a-entity position="11 0 -9.5" geometry="primitive: box; width: 1; height: 1; depth: 18;" collision="size: 1 1 18;" material="color: #4CC3D9;"></a-entity>
-        <a-entity position="2.5 0 -18" geometry="primitive: box; width: 16; height: 1; depth: 1;" collision="size: 16 1 1;" material="color: #4CC3D9;"></a-entity>
-        <a-entity position="-7 0 -17" geometry="primitive: box; width: 5; height: 1; depth: 1;" collision="size: 5 1 1;" material="color: #4CC3D9;"></a-entity>
-        <a-entity position="-9 0 -15.5" geometry="primitive: box; width: 1; height: 1; depth: 2;" collision="size: 1 1 2;" material="color: #4CC3D9;"></a-entity>
-        <a-entity position="-10 0 -13.5" geometry="primitive: box; width: 1; height: 1; depth: 4;" collision="size: 1 1 4;" material="color: #4CC3D9;"></a-entity>
-        <a-entity position="-11 0 -11" geometry="primitive: box; width: 3; height: 1; depth: 1;" collision="size: 3 1 1;" material="color: #4CC3D9;"></a-entity>
-        <a-entity position="-12 0 -8.5" geometry="primitive: box; width: 1; height: 1; depth: 4;" collision="size: 1 1 4;" material="color: #4CC3D9;"></a-entity>
-        <a-entity position="-13.5 0 -7" geometry="primitive: box; width: 2; height: 1; depth: 1;" collision="size: 2 1 1;" material="color: #4CC3D9;"></a-entity>
-        <a-entity position="-14 0 -2.5" geometry="primitive: box; width: 1; height: 1; depth: 8;" collision="size: 1 1 8;" material="color: #4CC3D9;"></a-entity>
+        <!-- South Wall -->
+        <a-entity position="11 0 3" rotation="0 180 0" gltf-model-2="#setWallExterior01" collision=""></a-entity>
+        <a-entity position="6 0 3" rotation="0 180 0" gltf-model-2="#setWallExterior01" collision=""></a-entity>
+        <a-entity position="1 0 3" rotation="0 180 0" gltf-model-2="#setWallExterior01" collision=""></a-entity>
+        <a-entity position="-4 0 3" rotation="0 180 0" gltf-model-2="#setWallExterior01" collision=""></a-entity>
+        <a-entity position="-9 0 3" rotation="0 180 0" gltf-model-2="#setWallExterior01" collision=""></a-entity>
+        <!-- East Wall -->
+        <a-entity position="11 0 -2" rotation="0 -90 0" gltf-model-2="#setWallExterior01" collision=""></a-entity>
+        <a-entity position="11 0 -7" rotation="0 -90 0" gltf-model-2="#setWallExterior01" collision=""></a-entity>
+        <a-entity position="11 0 -12" rotation="0 -90 0" gltf-model-2="#setWallExterior01" collision=""></a-entity>
+        <a-entity position="11 0 -17" rotation="0 -90 0" gltf-model-2="#setWallExterior01" collision=""></a-entity>
+        <!-- West Wall -->
+        <a-entity position="-14 0 3" rotation="0 90 0" gltf-model-2="#setWallExterior01" collision=""></a-entity>
+        <a-entity position="-14 0 -2" rotation="0 90 0" gltf-model-2="#setWallExterior01" collision=""></a-entity>
+        <a-entity position="-14 0 -7" rotation="0 90 0" gltf-model-2="#setWallExterior01" collision=""></a-entity>
+        <a-entity position="-14 0 -12" rotation="0 90 0" gltf-model-2="#setWallExterior01" collision=""></a-entity>
+        <!-- North Wall -->
+        <a-entity position="6 0 -17" rotation="0 0 0" gltf-model-2="#setWallExterior01" collision=""></a-entity>
+        <a-entity position="1 0 -17" rotation="0 0 0" gltf-model-2="#setWallExterior01" collision=""></a-entity>
+        <a-entity position="-4 0 -17" rotation="0 0 0" gltf-model-2="#setWallExterior01" collision=""></a-entity>
+        <a-entity position="-9 0 -17" rotation="0 0 0" gltf-model-2="#setWallExterior01" collision=""></a-entity>
+        <a-entity position="-14 0 -17" rotation="0 0 0" gltf-model-2="#setWallExterior01" collision=""></a-entity>
       </a-entity>
     </a-entity>
 
 
     <a-plane rotation="-90 0 0" width="24" height="20" scale="2.2 2 1"
-      position="-3 0 -15"
+      position="-3 0 -14"
       color="#7BC8A4" src="#textureGrass">
     </a-plane>
   </a-scene>
