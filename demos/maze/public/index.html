@@ -22,6 +22,18 @@
       <img id="skin" src="./assets/athleteFemaleBlue.png"></img>
       <img id="textureGrass" src="./assets/Fabric_10.jpg"></img>
 
+      <!-- Props -->
+      <a-asset-item id="propSafeDepositBoxContainer01" src="./assets/set/Prop_SafeDepositBox_Container_01.glb"></a-asset-item>
+      <a-asset-item id="propSafeDepositBoxContainer02" src="./assets/set/Prop_SafeDepositBox_Container_02.glb"></a-asset-item>
+      <a-asset-item id="propSafeDepositBoxes01" src="./assets/set/Prop_SafeDepositBoxes_01.glb"></a-asset-item>
+      <a-asset-item id="propSafeDepositBoxesEmpty01" src="./assets/set/Prop_SafeDepositBoxes_Empty_01.glb"></a-asset-item>
+      <a-asset-item id="propSafeDepositBoxesHalf01" src="./assets/set/Prop_SafeDepositBoxes_Half_01.glb"></a-asset-item>
+      <a-asset-item id="propSafeDepositBoxesHalf02" src="./assets/set/Prop_SafeDepositBoxes_Half_02.glb"></a-asset-item>
+      <a-asset-item id="propSafeDepositBoxesLooted01" src="./assets/set/Prop_SafeDepositBoxes_Looted_01.glb"></a-asset-item>
+      <a-asset-item id="propSafeDepositBoxCover01" src="./assets/set/Prop_SafeDepositBox_Cover_01.glb"></a-asset-item>
+      <a-asset-item id="propSafeDepositBoxCover02" src="./assets/set/Prop_SafeDepositBox_Cover_02.glb"></a-asset-item>
+      <a-asset-item id="propSafeDepositBoxCover02" src="./assets/set/Prop_SafeDepositBox_Cover_03.glb"></a-asset-item>
+
       <!-- Set Pieces -->
       <a-asset-item id="setVaultDoor01" src="./assets/set/VaultDoor_Frame_01.glb"></a-asset-item>
       <a-asset-item id="setVaultGateDoor01" src="./assets/set/VaultGate_Door_01.glb"></a-asset-item>
@@ -83,18 +95,17 @@
 
     <a-entity id="maze" position="0 0 0" scale="2 2 2">
 
-      <a-entity id="vault" position="0 0 0">
-        <a-entity position="-2 0 -5" rotation="0 -90 0" gltf-model-2="#setVaultDoor01"></a-entity>
-        <a-entity position="-2 0 -5" rotation="0 -90 0" gltf-model-2="#setVaultGateFrame01"></a-entity>
-        <a-entity position="-1.94396 0 -1.77902" rotation="0 -90 0" gltf-model-2="./assets/set/VaultGate_Door_01.glb"></a-entity>
+      <a-entity id="vault" position="3 0 -10">
+        <a-entity position="-1 0 -5" rotation="0 -90 0" gltf-model-2="#setVaultDoor01"></a-entity>
+        <a-entity position="-1 0 -5" rotation="0 -90 0" gltf-model-2="#setVaultGateFrame01"></a-entity>
+        <a-entity position="-0.94396 0 -1.77902" rotation="0 -90 0" gltf-model-2="./assets/set/VaultGate_Door_01.glb"></a-entity>
 
-        <a-entity position="4 0 -5" rotation="0 -90 0" gltf-model-2="#setWallInteriorWindowGround02"></a-entity>
-        <a-entity position="2 0 -5" rotation="0 -90 0" gltf-model-2="#setWallInteriorWindowGround01"></a-entity>
-
-
+        <a-entity position="4 0 -5" rotation="0 -90 0" collision gltf-model-2="#propSafeDepositBoxes01"></a-entity>
+        <a-entity position="-1 0 -5" rotation="0 0 0" collision gltf-model-2="#propSafeDepositBoxesHalf01"></a-entity>
+        <a-entity position="4 0 0" rotation="0 -180 0" collision gltf-model-2="#propSafeDepositBoxesHalf02"></a-entity>
       </a-entity>
 
-      <a-entity id="roomA" position="0 0 11">
+      <a-entity id="roomA" position="-10 0 0">
         <!-- Inside Walls -->
         <a-entity position="3 0 0" rotation="0 180 0" collision="" gltf-model-2="#setWallInteriorGround01"></a-entity>
         <a-entity position="-2 0 0" rotation="0 90 0" collision="" gltf-model-2="#setWallInteriorGround01"></a-entity>
