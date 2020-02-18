@@ -22,7 +22,7 @@
       <img id="skin" src="./assets/athleteFemaleBlue.png"></img>
       <img id="textureGrass" src="./assets/Fabric_10.jpg"></img>
 
-      <!-- Props -->
+      <!-- Props: Safe Deposit Box -->
       <a-asset-item id="propSafeDepositBoxContainer01" src="./assets/set/Prop_SafeDepositBox_Container_01.glb"></a-asset-item>
       <a-asset-item id="propSafeDepositBoxContainer02" src="./assets/set/Prop_SafeDepositBox_Container_02.glb"></a-asset-item>
       <a-asset-item id="propSafeDepositBoxes01" src="./assets/set/Prop_SafeDepositBoxes_01.glb"></a-asset-item>
@@ -33,6 +33,12 @@
       <a-asset-item id="propSafeDepositBoxCover01" src="./assets/set/Prop_SafeDepositBox_Cover_01.glb"></a-asset-item>
       <a-asset-item id="propSafeDepositBoxCover02" src="./assets/set/Prop_SafeDepositBox_Cover_02.glb"></a-asset-item>
       <a-asset-item id="propSafeDepositBoxCover02" src="./assets/set/Prop_SafeDepositBox_Cover_03.glb"></a-asset-item>
+
+      <a-asset-item id="propTellerDesk01" src="./assets/set/Prop_TellerDesk_01.glb"></a-asset-item>
+      <a-asset-item id="propTellerDesk02" src="./assets/set/Prop_TellerDesk_02.glb"></a-asset-item>
+      <a-asset-item id="propTellerDesk03" src="./assets/set/Prop_TellerDesk_03.glb"></a-asset-item>
+      <a-asset-item id="propTellerDeskBarrier01" src="./assets/set/Prop_TellerDesk_Barrier_01.glb"></a-asset-item>
+      <a-asset-item id="propTellerDeskBarrier02" src="./assets/set/Prop_TellerDesk_Barrier_02.glb"></a-asset-item>
 
       <!-- Set Pieces -->
       <a-asset-item id="setVaultDoor01" src="./assets/set/VaultDoor_Frame_01.glb"></a-asset-item>
@@ -94,6 +100,9 @@
 
 
     <a-entity id="maze" position="0 0 0" scale="2 2 2">
+      <a-entity position="-1 0 -5" rotation="0 -90 0" gltf-model-2="#propTellerDeskBarrier01"></a-entity>
+      <a-entity position="2 0 -5" rotation="0 -90 0" gltf-model-2="#propTellerDeskBarrier02"></a-entity>
+      <a-entity position="-4 0 -5" rotation="0 -90 0" gltf-model-2="#propTellerDesk03"></a-entity>
 
       <a-entity id="vault" position="3 0 -10">
         <a-entity position="-1 0 -5" rotation="0 -90 0" gltf-model-2="#setVaultDoor01"></a-entity>
