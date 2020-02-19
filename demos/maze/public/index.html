@@ -43,6 +43,16 @@
       <a-asset-item id="propDesk01" src="./assets/set/Prop_Desk_01.glb"></a-asset-item>
       <a-asset-item id="propDesk02" src="./assets/set/Prop_Desk_02.glb"></a-asset-item>
       <a-asset-item id="propDesk03" src="./assets/set/Prop_Desk_03.glb"></a-asset-item>
+      <a-asset-item id="propDesk04" src="./assets/set/Prop_Desk_04.glb"></a-asset-item>
+      <a-asset-item id="propSeat01" src="./assets/set/Prop_Seat_01.glb"></a-asset-item>
+
+      <!-- Pillars -->
+      <a-asset-item id="propPillar01" src="./assets/set/Pillar_01.glb"></a-asset-item>
+      <a-asset-item id="propPillar02" src="./assets/set/Pillar_02.glb"></a-asset-item>
+      <a-asset-item id="propPillarInterior01" src="./assets/set/Pillar_Interior_01.glb"></a-asset-item>
+      <a-asset-item id="propPillarInterior02" src="./assets/set/Pillar_Interior_02.glb"></a-asset-item>
+      <a-asset-item id="propPillarInterior03" src="./assets/set/Pillar_Interior_03.glb"></a-asset-item>
+      <a-asset-item id="propPillarInterior04" src="./assets/set/Pillar_Interior_04.glb"></a-asset-item>
 
       <!-- Set Pieces -->
       <a-asset-item id="setVaultDoor01" src="./assets/set/VaultDoor_Frame_01.glb"></a-asset-item>
@@ -104,13 +114,17 @@
 
 
     <a-entity id="maze" position="0 0 0" scale="2 2 2">
-      <a-entity position="-1 0 -5" rotation="0 -90 0" gltf-model-2="#propDesk01"></a-entity>
-      <a-entity position="2 0 -5" rotation="0 -90 0" gltf-model-2="#propDesk02"></a-entity>
-      <a-entity position="-4 0 -5" rotation="0 -90 0" gltf-model-2="#propDesk03"></a-entity>
 
-      <a-entity position="-1 0 -10" rotation="0 -90 0" gltf-model-2="#propTellerDesk01"></a-entity>
-      <a-entity position="-6 0 -10" rotation="0 -90 0" gltf-model-2="#propTellerDesk02"></a-entity>
-      <a-entity position="-4 0 -10" rotation="0 -90 0" gltf-model-2="#propTellerDesk03"></a-entity>
+
+      <a-entity id="lobby">
+        <a-entity position="-3 0 -3" rotation="0 -90 0" collision gltf-model-2="#propTellerDesk01"></a-entity>
+        <a-entity position="1 0 -3" rotation="0 -90 0" collision gltf-model-2="#propTellerDesk01"></a-entity>
+
+        <a-entity position="-3 0 -7" rotation="0 0 0" collision gltf-model-2="#propDesk04"></a-entity>
+        <a-entity position="-4.5 0 -8" rotation="0 0 0" collision gltf-model-2="#propSeat01"></a-entity>
+        <a-entity position="-1.5 0 -8" rotation="0 0 0" collision gltf-model-2="#propSeat01"></a-entity>
+
+      </a-entity>
 
       <a-entity id="vault" position="3 0 -10">
         <a-entity position="-1 0 -5" rotation="0 -90 0" gltf-model-2="#setVaultDoor01"></a-entity>
