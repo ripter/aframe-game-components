@@ -131,6 +131,7 @@ AFRAME.registerComponent('user-controls', {
 
 
     // Don't allow moving into the collision.
+    // TODO: Only kill the axis that would collide. Player should be able to 'slide' along a wall.
     if (isMovingNorth && isCollisionNorth) {
       velocity.z = 0;
     }

@@ -37,7 +37,6 @@ AFRAME.registerComponent('collision', {
 
     // Register our box in the collision system.
     this.system.add(this.el, this.box);
-    // this.update();
   },
 
   /**

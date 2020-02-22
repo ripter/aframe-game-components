@@ -5,7 +5,7 @@ import '../../../camera-orbit';
 import '../../../input';
 
 import './components/user-controls';
-
+import './components/pickup-able';
 
 
 import './systems/click-to-select';
