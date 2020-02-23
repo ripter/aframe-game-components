@@ -13,17 +13,22 @@ AFRAME.registerComponent('move-planner', {
    */
   init() {
     const POOL_COUNT = 3;
+
+    // Create a pool boxes to use as clickable UI
     this.poolBoxes = Array(POOL_COUNT).fill().map(() => {
-      const geometry = new THREE.OctahedronGeometry(0.25);
-      const material = new THREE.MeshPhongMaterial( { color: 0xFFDC00 } );
-      const mesh = new THREE.Mesh( geometry, material );
-      this.el.object3D.add(mesh);
-      return mesh;
+      // Create entities instead of Meshes so we can add them to the raycaster's collision detection.
+      // The raycaster is looking for entities with .clickable on them.
+      const entity = document.createElement('a-entity');
+      entity.setAttribute('geometry', 'primitive: octahedron; radius: 0.25');
+      entity.setAttribute('material', 'color: #FFDC00;');
+      entity.classList.add('clickable');
+      this.el.appendChild(entity);
+      return entity;
     });
 
     // Position the boxes in a line
-    this.poolBoxes.forEach((box, i) => {
-      box.position.x += 1 * (i+1);
+    this.poolBoxes.forEach((entity, i) => {
+      entity.object3D.position.x += 1 * (i*1);
     });
   },
 
@@ -79,6 +84,9 @@ AFRAME.registerComponent('move-planner', {
    */
   handleEvent(event) {
     switch (event.type) {
+      case 'click':
+        console.log('Planenr move clicked', event.target, event);
+        return;
       default:
         console.warn(`Unhandled event type: ${event.type}`, event); // eslint-disable-line
     }
