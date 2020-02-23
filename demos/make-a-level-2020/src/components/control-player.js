@@ -14,11 +14,13 @@ AFRAME.registerComponent('control-player', {
    * Components can use this to set initial state.
    */
   init() {
-    const { collision, input } = this.el.sceneEl.systems;
-    console.log('gravity init', this.el);
+    const { collision, input, game } = this.el.sceneEl.systems;
 
+    // create shortcuts for system methods.
     this.willCollide = collision.willCollide.bind(collision);
     this.isKeyDown = input.isKeyDown.bind(input);
+    this.setAsActive = game.setActive.bind(game);
+
 
     this.gravity = new THREE.Vector3(0, -0.1, 0);
     this.jump = new THREE.Vector3(0, 1, 0);
@@ -73,6 +75,14 @@ AFRAME.registerComponent('control-player', {
   },
 
 
+  play() {
+    this.el.addEventListener('click', this);
+  },
+  pause() {
+    this.el.removeEventListener('click', this);
+  },
+
+
   /**
    * DOM Event handler.
    * Called when a listening event is observed.
@@ -81,6 +91,9 @@ AFRAME.registerComponent('control-player', {
    */
   handleEvent(event) {
     switch (event.type) {
+      case 'click':
+        console.log('click', event);
+        return this.setAsActive(this.el);
       default:
         console.warn(`Unhandled event type: ${event.type}`, event); // eslint-disable-line
     }

@@ -12,13 +12,20 @@
 <body>
   <a-scene
     background="color: #ECECEC;"
+    game="indicator: #elmSelectIndicator"
     >
     <a-assets>
 
     </a-assets>
 
+    <a-entity id="elmSelectIndicator" class="clickable"
+      position="0 0 -900"
+      geometry="primitive: octahedron; radius: 0.25" material="color: #FFDC00;"
+      move-planner
+      >
+    </a-entity>
 
-    <a-entity id="player"
+    <a-entity id="player" class="clickable"
       position="0 2.7 -3" rotation="0 0 0"
       geometry="primitive: cylinder; height: 1.8; radius: 0.7;"
       material="color: #FF851B;"
@@ -30,7 +37,13 @@
 
 
     <a-entity id="rig-camera" position="0 1 2" rotation="-14 0 0" camera-box="target: #player;" >
-      <a-camera id="camera" wasd-controls-enabled="false"></a-camera>
+      <a-camera id="camera" wasd-controls-enabled="false">
+        <a-entity cursor="rayOrigin: mouse;"
+          raycaster="objects: .clickable"
+          position="0 0 -1"
+          >
+        </a-entity>
+      </a-camera>
     </a-entity>
 
 

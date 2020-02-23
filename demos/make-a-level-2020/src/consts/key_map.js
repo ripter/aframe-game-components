@@ -12,6 +12,7 @@ export const Key = {
 export const KEY_MAP = {
   ArrowUp: Key.Jump,
   KeyW: Key.Jump,
+  Space: Key.Jump,
   KeyD: Key.Forward,
   ArrowRight: Key.Forward,
   KeyA: Key.Backward,
