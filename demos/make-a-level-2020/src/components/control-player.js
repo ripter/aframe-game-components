@@ -38,8 +38,10 @@ AFRAME.registerComponent('control-player', {
    * @param {number} time - Scene tick time.
    * @param {number} timeDelta - Difference in current render time and previous render time.
    */
-  tick(time, timeDelta) {
-    const { el, gravity, isKeyDown, willCollide, velocity } = this;
+  tick() {
+    const {
+      el, gravity, isKeyDown, willCollide, velocity,
+    } = this;
     const collidedEl = willCollide(el, gravity);
 
     // Reset the velocity based on user input
@@ -48,7 +50,7 @@ AFRAME.registerComponent('control-player', {
     if (isKeyDown(Key.Jump)) {
       if (this.canJump) {
         this.canJump = false;
-        return AFRAME.ANIME({
+        AFRAME.ANIME({
           targets: this.el.object3D.position,
           y: '+=1',
           duration: 250,
@@ -59,15 +61,13 @@ AFRAME.registerComponent('control-player', {
 
     if (isKeyDown(Key.Forward)) {
       velocity.x = 0.2;
-    }
-    else if(isKeyDown(Key.Backward)) {
+    } else if (isKeyDown(Key.Backward)) {
       velocity.x = -0.2;
     }
 
     if (!collidedEl) {
       el.object3D.translateY(gravity.y);
-    }
-    else {
+    } else {
       this.canJump = true;
     }
 
@@ -92,10 +92,9 @@ AFRAME.registerComponent('control-player', {
   handleEvent(event) {
     switch (event.type) {
       case 'click':
-        console.log('click', event);
         return this.setAsActive(this.el);
       default:
-        console.warn(`Unhandled event type: ${event.type}`, event); // eslint-disable-line
+        return console.warn(`Unhandled event type: ${event.type}`, event); // eslint-disable-line
     }
   },
 });

@@ -2,8 +2,6 @@ import { Key } from '../consts/key_map';
 import { readKeysAsRocker } from '../../../../utils/readKeysAsRocker';
 
 
-
-
 /**
  * Sets velocity to match the player's inputed velocity
 */

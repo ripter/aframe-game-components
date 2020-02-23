@@ -17,15 +17,14 @@ AFRAME.registerComponent('camera-box', {
   tick: (() => {
     const worldPosition = new THREE.Vector3();
 
-    return function tick(time, timeDelta) {
-      const { isKeyDown } = this;
+    return function tick() {
       const { target } = this.data;
       if (!target || !target.object3D) { return; }
 
       target.object3D.getWorldPosition(worldPosition);
       this.el.object3D.position.x = worldPosition.x;
       this.el.object3D.position.y = worldPosition.y - 1;
-    }
+    };
   })(),
 
   /**

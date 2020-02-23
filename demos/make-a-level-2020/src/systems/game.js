@@ -7,7 +7,6 @@ AFRAME.registerSystem('game', {
 
   init() {
     const { input } = this.sceneEl.systems;
-    console.log('game.data', this.data);
 
     // Register custom keymap
     input.setKeyMap(KEY_MAP);
@@ -36,9 +35,9 @@ AFRAME.registerSystem('game', {
       x: `+=${offset.x}`,
       duration: 250,
       easing: 'easeOutCubic',
-      complete: () => {
-        console.log('animation done');
-      },
+      // complete: () => {
+      //   console.log('animation done');
+      // },
     });
   },
 });
