@@ -24,7 +24,6 @@ AFRAME.registerComponent('control-player', {
     this.jump = new THREE.Vector3(0, 1, 0);
 
     this.velocity = new THREE.Vector3(0, 0, 0);
-    this.isJumping = false;
     this.canJump = true;
   },
 
@@ -40,8 +39,8 @@ AFRAME.registerComponent('control-player', {
   tick(time, timeDelta) {
     const { el, gravity, isKeyDown, willCollide, velocity } = this;
     const collidedEl = willCollide(el, gravity);
-    const z = el.object3D.position.z;
 
+    // Reset the velocity based on user input
     setVelocityFromPlayerInput(isKeyDown, velocity);
 
     if (isKeyDown(Key.Jump)) {
@@ -57,10 +56,10 @@ AFRAME.registerComponent('control-player', {
     }
 
     if (isKeyDown(Key.Forward)) {
-      el.object3D.translateX(0.2);
+      velocity.x = 0.2;
     }
     else if(isKeyDown(Key.Backward)) {
-      el.object3D.translateX(-0.2);
+      velocity.x = -0.2;
     }
 
     if (!collidedEl) {
@@ -69,6 +68,8 @@ AFRAME.registerComponent('control-player', {
     else {
       this.canJump = true;
     }
+
+    el.object3D.translateX(velocity.x);
   },
 
 
