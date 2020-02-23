@@ -1,8 +1,9 @@
 
-import { KEY_MAP } from './key_map';
+// import { KEY_MAP } from './key_map';
 
 /**
  * Maps key presses to InputAction, allowsing components to repond to user input.
+ *
 */
 AFRAME.registerSystem('input', {
   /**
@@ -10,8 +11,13 @@ AFRAME.registerSystem('input', {
    * Systems can use this to set initial state.
    */
   init() {
-    this.keysDown = {}; // holds
+    this.keyMap = {};
+    this.keysDown = {};
     this.bindEvents();
+  },
+
+  setKeyMap(map) {
+    this.keyMap = map;
   },
 
   /**
@@ -45,7 +51,7 @@ AFRAME.registerSystem('input', {
    */
   handleEvent(event) {
     const keyCode = event.code;
-    const mappedKey = KEY_MAP[keyCode];
+    const mappedKey = this.keyMap[keyCode];
 
     // Ignore keys not in the mapping.
     if (!mappedKey) { return; }

@@ -97,29 +97,6 @@ eval("/**\n * Plays animations on the model.\n * Refrences 'mesh' and 'animRoot'
 
 /***/ }),
 
-/***/ "../../camera-orbit/component.js":
-/*!*********************************************************************************!*\
-  !*** /Users/chrisrichards/dev/aframe-game-components/camera-orbit/component.js ***!
-  \*********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-eval("\n/**\n * Camera: Orbit\n * Basic Orbiting Camera.\n * Follows target, user can use Key.PanLeft and Key.PanRight to pan the camera.\n */\nAFRAME.registerComponent('camera-orbit', {\n  schema: {\n    target: { type: 'selector' },\n    offset: { type: 'vec3' },\n    keyPanLeft: { default: 'Key.Camera.Pan.Left' },\n    keyPanRight: { default: 'Key.Camera.Pan.Right' },\n  },\n\n  /**\n   * Init handler. Similar to attachedCallback.\n   * Called during component initialization and is only run once.\n   * Components can use this to set initial state.\n   */\n  init() {\n    const { input } = this.el.sceneEl.systems;\n\n    this.tmpMatrix = new THREE.Matrix4();\n    this.tmpVector = new THREE.Vector3();\n    this.thetaDeg = 0;\n\n    // Bind methods from systems to make it easy to call them.\n    this.isKeyDown = input.isKeyDown.bind(input);\n  },\n\n  /**\n   * Update handler. Similar to attributeChangedCallback.\n   * Called whenever component's data changes.\n   * Also called on component initialization when the component receives initial data.\n   *\n   * @param {object} prevData - Previous attributes of the component.\n   */\n  update(prevData) {\n    // console.group('camera-orbit.update');\n    // console.log('prevData', prevData);\n    // console.log('data', this.data);\n    // console.groupEnd();\n  },\n\n  /**\n   * Tick handler.\n   * Called on each tick of the scene render loop.\n   * Affected by play and pause.\n   *\n   * @param {number} time - Scene tick time.\n   * @param {number} timeDelta - Difference in current render time and previous render time.\n   */\n  tick(time, timeDelta) {\n    const { tmpMatrix, tmpVector, isKeyDown } = this;\n    const { target, offset, keyPanLeft, keyPanRight } = this.data;\n    if (!target || !target.object3D) { return; }\n\n    if (isKeyDown(keyPanLeft)) {\n      // Rotate the position and the rotation, so the camera continues to face the same direction.\n      this.thetaDeg += 1;\n      this.el.object3D.rotation.y += THREE.Math.degToRad(1);\n    }\n    else if (isKeyDown(keyPanRight)) {\n      // Rotate the position and the rotation, so the camera continues to face the same direction.\n      this.thetaDeg -= 1;\n      this.el.object3D.rotation.y -= THREE.Math.degToRad(1);\n    }\n\n    // Start by centering on the target.\n    this.el.object3D.position.copy(target.object3D.position);\n\n    tmpVector.setFromCylindricalCoords(4, THREE.Math.degToRad(this.thetaDeg), 3);\n\n    this.el.object3D.position.add(tmpVector);\n  },\n\n  /**\n   * Called to start any dynamic behavior (e.g., animation, AI, events, physics).\n   */\n  play() {\n  },\n\n  /**\n   * Called to stop any dynamic behavior (e.g., animation, AI, events, physics).\n   */\n  pause() {\n  },\n\n\n  /**\n   * Remove handler. Similar to detachedCallback.\n   * Called whenever component is removed from the entity (i.e., removeAttribute).\n   * Components can use this to reset behavior on the entity.\n   */\n  remove() {\n  },\n\n  /**\n   * DOM Event handler.\n   * Called when a listening event is observed.\n   * @param  {Event} event the event that has been fired and needs to be processed.\n   * @return {undefined}\n   */\n  handleEvent(event) {\n    switch (event.type) {\n      default:\n        console.warn(`Unhandled event type: ${event.type}`, event); // eslint-disable-line\n    }\n  },\n});\n\n\n//# sourceURL=webpack:////Users/chrisrichards/dev/aframe-game-components/camera-orbit/component.js?");
-
-/***/ }),
-
-/***/ "../../camera-orbit/index.js":
-/*!*****************************************************************************!*\
-  !*** /Users/chrisrichards/dev/aframe-game-components/camera-orbit/index.js ***!
-  \*****************************************************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./component */ \"../../camera-orbit/component.js\");\n/* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_component__WEBPACK_IMPORTED_MODULE_0__);\n\n\n\n//# sourceURL=webpack:////Users/chrisrichards/dev/aframe-game-components/camera-orbit/index.js?");
-
-/***/ }),
-
 /***/ "../../collision-aabb/component.js":
 /*!***********************************************************************************!*\
   !*** /Users/chrisrichards/dev/aframe-game-components/collision-aabb/component.js ***!
@@ -173,19 +150,7 @@ eval("/**\n * Patched version of gltf-model that sets 'mesh' to the SkinnedMesh 
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _system_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./system.js */ \"../../input/system.js\");\n\n\n\n//# sourceURL=webpack:////Users/chrisrichards/dev/aframe-game-components/input/index.js?");
-
-/***/ }),
-
-/***/ "../../input/key_map.js":
-/*!************************************************************************!*\
-  !*** /Users/chrisrichards/dev/aframe-game-components/input/key_map.js ***!
-  \************************************************************************/
-/*! exports provided: Key, KEY_MAP */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"Key\", function() { return Key; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"KEY_MAP\", function() { return KEY_MAP; });\n\n// Define all known keys.\nconst Key = {\n  Forward: 'Key.Forward',\n  Backward: 'Key.Backward',\n  TurnLeft: 'Key.Turn.Left',\n  TurnRight: 'Key.Turn.Right',\n  PanLeft: 'Key.Camera.Pan.Left',\n  PanRight: 'Key.Camera.Pan.Right',\n};\n\n/**\n * Map key codes to our custom keys\n */\nconst KEY_MAP = {\n  ArrowUp: Key.Forward,\n  KeyW: Key.Forward,\n  ArrowDown: Key.Backward,\n  KeyS: Key.Backward,\n  ArrowLeft: Key.TurnLeft,\n  KeyA: Key.TurnLeft,\n  ArrowRight: Key.TurnRight,\n  KeyD: Key.TurnRight,\n  KeyQ: Key.PanLeft,\n  KeyE: Key.PanRight,\n};\n\n\n//# sourceURL=webpack:////Users/chrisrichards/dev/aframe-game-components/input/key_map.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _system_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./system.js */ \"../../input/system.js\");\n/* harmony import */ var _system_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_system_js__WEBPACK_IMPORTED_MODULE_0__);\n\n\n\n//# sourceURL=webpack:////Users/chrisrichards/dev/aframe-game-components/input/index.js?");
 
 /***/ }),
 
@@ -193,68 +158,57 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 /*!***********************************************************************!*\
   !*** /Users/chrisrichards/dev/aframe-game-components/input/system.js ***!
   \***********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("\n// import { KEY_MAP } from './key_map';\n\n/**\n * Maps key presses to InputAction, allowsing components to repond to user input.\n *\n*/\nAFRAME.registerSystem('input', {\n  /**\n   * Init handler. Called during scene initialization and is only run once.\n   * Systems can use this to set initial state.\n   */\n  init() {\n    this.keyMap = {};\n    this.keysDown = {};\n    this.bindEvents();\n  },\n\n  setKeyMap(map) {\n    this.keyMap = map;\n  },\n\n  /**\n   * Returns true if the Key is currenly pressed.\n  */\n  isKeyDown(key) {\n    return this.keysDown[key] || false;\n  },\n\n  /**\n   * Called to start any dynamic behavior (e.g., animation, AI, events, physics).\n   */\n  bindEvents() {\n    window.addEventListener('keydown', this);\n    window.addEventListener('keyup', this);\n  },\n\n  /**\n   * Called to stop any dynamic behavior (e.g., animation, AI, events, physics).\n   */\n  unBindEvents() {\n    window.removeEventListener('keydown', this);\n    window.removeEventListener('keyup', this);\n  },\n\n  /**\n   * DOM Event handler.\n   * Called when a listening event is observed.\n   * @param  {Event} event the event that has been fired and needs to be processed.\n   * @return {undefined}\n   */\n  handleEvent(event) {\n    const keyCode = event.code;\n    const mappedKey = this.keyMap[keyCode];\n\n    // Ignore keys not in the mapping.\n    if (!mappedKey) { return; }\n\n    // Change the state of the mapped key based on the event type.\n    switch (event.type) {\n      case 'keydown':\n        this.keysDown[mappedKey] = true;\n        break;\n      case 'keyup':\n        this.keysDown[mappedKey] = false;\n        break;\n      default:\n        console.warn(`Unhandled event type: ${event.type}`, event, this); // eslint-disable-line\n    }\n  },\n});\n\n\n//# sourceURL=webpack:////Users/chrisrichards/dev/aframe-game-components/input/system.js?");
+
+/***/ }),
+
+/***/ "../../utils/readKeysAsRocker.js":
+/*!*********************************************************************************!*\
+  !*** /Users/chrisrichards/dev/aframe-game-components/utils/readKeysAsRocker.js ***!
+  \*********************************************************************************/
+/*! exports provided: readKeysAsRocker */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"readKeysAsRocker\", function() { return readKeysAsRocker; });\n\n/**\n * Helper to read two keys as a rocker switch.\n * if keyA is down, return 1\n * if keyB is down, reutrn -1\n * else return 0\n*/\nfunction readKeysAsRocker(isKeyDown, keyA, keyB) {\n  if (isKeyDown(keyA)) {\n    return 1;\n  } if (isKeyDown(keyB)) {\n    return -1;\n  }\n  return 0;\n}\n\n\n//# sourceURL=webpack:////Users/chrisrichards/dev/aframe-game-components/utils/readKeysAsRocker.js?");
+
+/***/ }),
+
+/***/ "./src/components/camera-box.js":
+/*!**************************************!*\
+  !*** ./src/components/camera-box.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("\n/**\n * Camera: Orbit\n * Basic Orbiting Camera.\n * Follows target, user can use Key.PanLeft and Key.PanRight to pan the camera.\n */\nAFRAME.registerComponent('camera-box', {\n  schema: {\n    target: { type: 'selector' },\n    offset: { type: 'vec3' },\n  },\n\n  /**\n   * Init handler. Similar to attachedCallback.\n   * Called during component initialization and is only run once.\n   * Components can use this to set initial state.\n   */\n  init() {\n    console.log('camera-box')\n    // const { input } = this.el.sceneEl.systems;\n\n    // this.tmpMatrix = new THREE.Matrix4();\n    // this.tmpVector = new THREE.Vector3();\n    // this.thetaDeg = 0;\n    //\n    // // Bind methods from systems to make it easy to call them.\n    // this.isKeyDown = input.isKeyDown.bind(input);\n  },\n\n  /**\n   * Update handler. Similar to attributeChangedCallback.\n   * Called whenever component's data changes.\n   * Also called on component initialization when the component receives initial data.\n   *\n   * @param {object} prevData - Previous attributes of the component.\n   */\n  update(prevData) {\n    // console.group('camera-orbit.update');\n    // console.log('prevData', prevData);\n    // console.log('data', this.data);\n    // console.groupEnd();\n  },\n\n  /**\n   * Tick handler.\n   * Called on each tick of the scene render loop.\n   * Affected by play and pause.\n   *\n   * @param {number} time - Scene tick time.\n   * @param {number} timeDelta - Difference in current render time and previous render time.\n   */\n  tick(time, timeDelta) {\n    const { tmpMatrix, tmpVector, isKeyDown } = this;\n    const { target, offset } = this.data;\n    if (!target || !target.object3D) { return; }\n\n    console.log('camera');\n    this.el.object3D.lookAt(target.object3D.position);\n  },\n\n  /**\n   * Called to start any dynamic behavior (e.g., animation, AI, events, physics).\n   */\n  play() {\n  },\n\n  /**\n   * Called to stop any dynamic behavior (e.g., animation, AI, events, physics).\n   */\n  pause() {\n  },\n\n\n  /**\n   * Remove handler. Similar to detachedCallback.\n   * Called whenever component is removed from the entity (i.e., removeAttribute).\n   * Components can use this to reset behavior on the entity.\n   */\n  remove() {\n  },\n\n  /**\n   * DOM Event handler.\n   * Called when a listening event is observed.\n   * @param  {Event} event the event that has been fired and needs to be processed.\n   * @return {undefined}\n   */\n  handleEvent(event) {\n    switch (event.type) {\n      default:\n        console.warn(`Unhandled event type: ${event.type}`, event); // eslint-disable-line\n    }\n  },\n});\n\n\n//# sourceURL=webpack:///./src/components/camera-box.js?");
+
+/***/ }),
+
+/***/ "./src/components/control-player.js":
+/*!******************************************!*\
+  !*** ./src/components/control-player.js ***!
+  \******************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _key_map__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./key_map */ \"../../input/key_map.js\");\n\n\n\n/**\n * Maps key presses to InputAction, allowsing components to repond to user input.\n*/\nAFRAME.registerSystem('input', {\n  /**\n   * Init handler. Called during scene initialization and is only run once.\n   * Systems can use this to set initial state.\n   */\n  init() {\n    this.keysDown = {}; // holds\n    this.bindEvents();\n  },\n\n  /**\n   * Returns true if the Key is currenly pressed.\n  */\n  isKeyDown(key) {\n    return this.keysDown[key] || false;\n  },\n\n  /**\n   * Called to start any dynamic behavior (e.g., animation, AI, events, physics).\n   */\n  bindEvents() {\n    window.addEventListener('keydown', this);\n    window.addEventListener('keyup', this);\n  },\n\n  /**\n   * Called to stop any dynamic behavior (e.g., animation, AI, events, physics).\n   */\n  unBindEvents() {\n    window.removeEventListener('keydown', this);\n    window.removeEventListener('keyup', this);\n  },\n\n  /**\n   * DOM Event handler.\n   * Called when a listening event is observed.\n   * @param  {Event} event the event that has been fired and needs to be processed.\n   * @return {undefined}\n   */\n  handleEvent(event) {\n    const keyCode = event.code;\n    const mappedKey = _key_map__WEBPACK_IMPORTED_MODULE_0__[\"KEY_MAP\"][keyCode];\n\n    // Ignore keys not in the mapping.\n    if (!mappedKey) { return; }\n\n    // Change the state of the mapped key based on the event type.\n    switch (event.type) {\n      case 'keydown':\n        this.keysDown[mappedKey] = true;\n        break;\n      case 'keyup':\n        this.keysDown[mappedKey] = false;\n        break;\n      default:\n        console.warn(`Unhandled event type: ${event.type}`, event, this); // eslint-disable-line\n    }\n  },\n});\n\n\n//# sourceURL=webpack:////Users/chrisrichards/dev/aframe-game-components/input/system.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _consts_key_map__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../consts/key_map */ \"./src/consts/key_map.js\");\n/* harmony import */ var _utils_setVelocityFromPlayerInput__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/setVelocityFromPlayerInput */ \"./src/utils/setVelocityFromPlayerInput.js\");\n\n\n/**\n * Stupid Simple Gravity using the AABB collision system.\n */\nAFRAME.registerComponent('control-player', {\n  schema: {\n    // clipName: { default: 'Idle' },\n  },\n\n  /**\n   * Init handler. Similar to attachedCallback.\n   * Called during component initialization and is only run once.\n   * Components can use this to set initial state.\n   */\n  init() {\n    const { collision, input } = this.el.sceneEl.systems;\n    console.log('gravity init', this.el);\n\n    this.willCollide = collision.willCollide.bind(collision);\n    this.isKeyDown = input.isKeyDown.bind(input);\n\n    this.gravity = new THREE.Vector3(0, -0.1, 0);\n    this.jump = new THREE.Vector3(0, 1, 0);\n\n    this.velocity = new THREE.Vector3(0, 0, 0);\n    this.isJumping = false;\n    this.canJump = true;\n  },\n\n\n  /**\n   * Tick handler.\n   * Called on each tick of the scene render loop.\n   * Affected by play and pause.\n   *\n   * @param {number} time - Scene tick time.\n   * @param {number} timeDelta - Difference in current render time and previous render time.\n   */\n  tick(time, timeDelta) {\n    const { el, gravity, isKeyDown, willCollide, velocity } = this;\n    const collidedEl = willCollide(el, gravity);\n    const z = el.object3D.position.z;\n\n    Object(_utils_setVelocityFromPlayerInput__WEBPACK_IMPORTED_MODULE_1__[\"setVelocityFromPlayerInput\"])(isKeyDown, velocity);\n\n    if (isKeyDown(_consts_key_map__WEBPACK_IMPORTED_MODULE_0__[\"Key\"].Jump)) {\n      if (this.canJump) {\n        console.log('JUMP')\n        this.canJump = false;\n        return AFRAME.ANIME({\n          targets: this.el.object3D.position,\n          y: '+=1',\n          duration: 100,\n          easing: 'linear',\n          complete: () => {\n          },\n        });\n      }\n    }\n\n    if (isKeyDown(_consts_key_map__WEBPACK_IMPORTED_MODULE_0__[\"Key\"].Forward)) {\n      el.object3D.translateX(0.2);\n    }\n    else if(isKeyDown(_consts_key_map__WEBPACK_IMPORTED_MODULE_0__[\"Key\"].Backward)) {\n      el.object3D.translateX(-0.2);\n    }\n\n    if (!collidedEl) {\n      el.object3D.translateY(gravity.y);\n    }\n    else {\n      this.canJump = true;\n      // console.log('position', el.object3D.position);\n      // el.object3D.position.lerp(this.jump, 0.5);\n      // el.object3D.position.z = z;\n    }\n  },\n\n\n  /**\n   * DOM Event handler.\n   * Called when a listening event is observed.\n   * @param  {Event} event the event that has been fired and needs to be processed.\n   * @return {undefined}\n   */\n  handleEvent(event) {\n    switch (event.type) {\n      default:\n        console.warn(`Unhandled event type: ${event.type}`, event); // eslint-disable-line\n    }\n  },\n});\n\n\n//# sourceURL=webpack:///./src/components/control-player.js?");
 
 /***/ }),
 
-/***/ "./src/components/boxTest.js":
-/*!***********************************!*\
-  !*** ./src/components/boxTest.js ***!
-  \***********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-eval("\nAFRAME.registerComponent('box-test', {\n  schema: {\n    size: { type: 'vec3', default: { x: 1, y: 1.8, z: 1 } },\n  },\n\n  /**\n   * Init handler. Similar to attachedCallback.\n   * Called during component initialization and is only run once.\n   * Components can use this to set initial state.\n   */\n  init() {\n    this.center = new THREE.Vector3();\n\n    // Create our new Box3\n    const box = new THREE.Box3();\n    this.box = box;\n\n    // Create a helper to help visualize the box.\n    const helper = this.helper = new THREE.Box3Helper(box, 0xFF851B);\n    this.el.sceneEl.object3D.add(helper);\n  },\n\n  /**\n   * Tick handler.\n   * Called on each tick of the scene render loop.\n   * Affected by play and pause.\n   *\n   * @param {number} time - Scene tick time.\n   * @param {number} timeDelta - Difference in current render time and previous render time.\n   */\n  tick() {\n    const mesh = this.el.getObject3D('mesh');\n    if (!mesh) { return; }\n    const { box } = this;\n\n    // Update the Box to match position/size/rotation\n    box.copy(mesh.geometry.boundingBox).applyMatrix4(mesh.matrixWorld);\n\n    // Update the size to match the schema, keeping the center.\n    const { center } = this;\n    const { size } = this.data;\n    box.getCenter(center);\n    box.setFromCenterAndSize(center, size);\n  },\n});\n\n\n//# sourceURL=webpack:///./src/components/boxTest.js?");
-
-/***/ }),
-
-/***/ "./src/components/click-to-select.js":
-/*!*******************************************!*\
-  !*** ./src/components/click-to-select.js ***!
-  \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-eval("/**\n * Clicking on the entity will move the named component to this one.\n */\nAFRAME.registerComponent('click-to-select', {\n  /**\n   * Called to start any dynamic behavior (e.g., animation, AI, events, physics).\n   */\n  play() {\n    this.el.addEventListener('click', this);\n  },\n\n  /**\n   * Called to stop any dynamic behavior (e.g., animation, AI, events, physics).\n   */\n  pause() {\n    this.el.removeEventListener('click', this);\n  },\n\n  /**\n   * DOM Event handler.\n   * Called when a listening event is observed.\n   * @param  {Event} event the event that has been fired and needs to be processed.\n   * @return {undefined}\n   */\n  handleEvent(event) {\n    switch (event.type) {\n      case 'click':\n        this.system.select(this.el);\n        break;\n      default:\n        console.warn(`Unhandled event type: ${event.type}`, event, this); // eslint-disable-line\n    }\n  },\n});\n\n\n//# sourceURL=webpack:///./src/components/click-to-select.js?");
-
-/***/ }),
-
-/***/ "./src/components/pickup-able.js":
-/*!***************************************!*\
-  !*** ./src/components/pickup-able.js ***!
-  \***************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-eval("/**\n * Item is added to inventory when the player picks it up.\n */\nAFRAME.registerComponent('pickup-able', {\n  schema: {\n  },\n\n  /**\n   * Init handler. Similar to attachedCallback.\n   * Called during component initialization and is only run once.\n   * Components can use this to set initial state.\n   */\n  init() {\n  },\n\n  /**\n   * Update handler. Similar to attributeChangedCallback.\n   * Called whenever component's data changes.\n   * Also called on component initialization when the component receives initial data.\n   *\n   * @param {object} prevData - Previous attributes of the component.\n   */\n  update(prevData) {\n  },\n\n  /**\n   * Tick handler.\n   * Called on each tick of the scene render loop.\n   * Affected by play and pause.\n   *\n   * @param {number} time - Scene tick time.\n   * @param {number} timeDelta - Difference in current render time and previous render time.\n   */\n  tick(time, timeDelta) {\n  },\n\n  /**\n   * Called to start any dynamic behavior (e.g., animation, AI, events, physics).\n   */\n  play() {\n    this.el.addEventListener('collided', this);\n  },\n\n  /**\n   * Called to stop any dynamic behavior (e.g., animation, AI, events, physics).\n   */\n  pause() {\n  },\n\n\n  /**\n   * Remove handler. Similar to detachedCallback.\n   * Called whenever component is removed from the entity (i.e., removeAttribute).\n   * Components can use this to reset behavior on the entity.\n   */\n  remove() {\n  },\n\n  /**\n   * DOM Event handler.\n   * Called when a listening event is observed.\n   * @param  {Event} event the event that has been fired and needs to be processed.\n   * @return {undefined}\n   */\n  handleEvent(event) {\n    switch (event.type) {\n      default:\n        console.warn(`Unhandled event type: ${event.type}`, event); // eslint-disable-line\n    }\n  },\n});\n\n\n//# sourceURL=webpack:///./src/components/pickup-able.js?");
-
-/***/ }),
-
-/***/ "./src/components/user-controls.js":
-/*!*****************************************!*\
-  !*** ./src/components/user-controls.js ***!
-  \*****************************************/
-/*! no exports provided */
+/***/ "./src/consts/key_map.js":
+/*!*******************************!*\
+  !*** ./src/consts/key_map.js ***!
+  \*******************************/
+/*! exports provided: Key, KEY_MAP */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _utils_readKeysAsRocker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/readKeysAsRocker */ \"./src/utils/readKeysAsRocker.js\");\n\n\n/**\n * User Controls for the demo\n */\nAFRAME.registerComponent('user-controls', {\n  schema: {\n    enabled: { default: true },\n    speed: { default: 0.05 },\n    clipWalk: { default: 'Walk' },\n    clipIdle: { default: 'Idle' },\n    keyForward: { default: 'Key.Forward' },\n    keyBackward: { default: 'Key.Backward' },\n    keyTurnLeft: { default: 'Key.Turn.Left' },\n    keyTurnRight: { default: 'Key.Turn.Right' },\n  },\n\n  /**\n   * Init handler. Similar to attachedCallback.\n   * Called during component initialization and is only run once.\n   * Components can use this to set initial state.\n   */\n  init() {\n    const { collision, input } = this.el.sceneEl.systems;\n    const animMixer = this.el.components['anim-mixer'];\n\n    // Bind methods from systems to make it easy to call them.\n    this.isKeyDown = input.isKeyDown.bind(input);\n    this.playAnimation = animMixer.playAction.bind(animMixer);\n    this.willCollide = collision.willCollide.bind(collision);\n    this.getCollision = collision.getCollisionBoxes.bind(collision);\n  },\n\n  /**\n   * Tick handler.\n   * Called on each tick of the scene render loop.\n   * Affected by play and pause.\n   *\n   * @param {number} time - Scene tick time.\n   * @param {number} timeDelta - Difference in current render time and previous render time.\n   */\n  tick() {\n    if (!this.data.enabled) { return; } // bail if not enabled\n    if (!this.el.getObject3D('mesh') || !this.el.getObject3D('armature')) { return; }\n\n    const { el } = this;\n    const { velocity, rotation } = this.readUserInput();\n\n    // Check collisins with other moving mobs\n    this.updateVelocityFromCollisions(velocity);\n    // use velocity to pick the animation.\n    this.updateAnimation(velocity);\n\n    // Match rotation\n    el.object3D.rotateY(rotation.y);\n    // use translate to move the object along it's local axis\n    el.object3D.translateX(velocity.x);\n    el.object3D.translateZ(velocity.z);\n  },\n\n\n  /**\n   * Reads isKeyDown to create velocity and rotation values.\n  */\n  readUserInput: (() => {\n    const rotation = new THREE.Euler();\n    const velocity = new THREE.Vector3();\n\n    return function readUserInput() {\n      const { isKeyDown } = this;\n      const { speed, keyForward, keyBackward, keyTurnLeft, keyTurnRight } = this.data;\n\n      // Reset the velocity back to 0\n      velocity.set(0, 0, 0);\n\n      // Create a rocker style switch with two Keys.\n      velocity.z = Object(_utils_readKeysAsRocker__WEBPACK_IMPORTED_MODULE_0__[\"readKeysAsRocker\"])(isKeyDown, keyForward, keyBackward) * speed;\n      rotation.y = Object(_utils_readKeysAsRocker__WEBPACK_IMPORTED_MODULE_0__[\"readKeysAsRocker\"])(isKeyDown, keyTurnLeft, keyTurnRight) * speed;\n\n      return {\n        velocity,\n        rotation,\n      };\n    };\n  })(),\n\n  /**\n   * Update the animation based on velocity.\n  */\n  updateAnimation(velocity) {\n    const { playAnimation } = this;\n    const { clipWalk, clipIdle } = this.data;\n\n    if (velocity.x === 0 && velocity.z === 0) {\n      playAnimation(clipIdle);\n    } else {\n      playAnimation(clipWalk);\n    }\n  },\n\n  /**\n   * Updates the velocity refrence if there are collisins.\n  */\n  updateVelocityFromCollisions(velocity) {\n    const { el, willCollide, getCollision } = this;\n    const collidedEl = willCollide(el, velocity);\n    if (!collidedEl) { return velocity; }\n    const [boxA, boxB] = getCollision(el, collidedEl);\n\n    // Skip if we are not trying to move\n    if (velocity.x === 0 && velocity.y === 0 && velocity.z === 0) {\n      return velocity;\n    }\n\n    // Convert the local velocity into world velocity.\n    const velocityWorld = new THREE.Vector3();\n    velocityWorld.copy(velocity);\n    velocityWorld.applyQuaternion(el.object3D.quaternion);\n    // use the world velocity to figure out which world direction we are moving\n    const isMovingEast = velocityWorld.x > 0;\n    const isMovingWest = velocityWorld.x < 0;\n    const isMovingNorth = velocityWorld.z < 0;\n    const isMovingSouth = velocityWorld.z > 0;\n\n\n    // Figure out which direction the collision is on.\n    const isCollisionSouth = boxA.min.z < boxB.min.z;\n    const isCollisionNorth = boxA.max.z > boxB.max.z;\n    const isCollisionEast = boxA.min.x < boxB.min.x;\n    const isCollisionWest = boxA.max.x > boxB.max.x;\n\n\n    // Don't allow moving into the collision.\n    // TODO: Only kill the axis that would collide. Player should be able to 'slide' along a wall.\n    if (isMovingNorth && isCollisionNorth) {\n      velocity.z = 0;\n    }\n    else if (isMovingSouth && isCollisionSouth) {\n      velocity.z = 0;\n    }\n\n    if (isMovingEast && isCollisionEast) {\n      velocity.z = 0;\n    }\n    else if (isMovingWest && isCollisionWest) {\n      velocity.z = 0;\n    }\n\n    return velocity;\n  },\n});\n\n\n//# sourceURL=webpack:///./src/components/user-controls.js?");
-
-/***/ }),
-
-/***/ "./src/consts/error.js":
-/*!*****************************!*\
-  !*** ./src/consts/error.js ***!
-  \*****************************/
-/*! exports provided: ERROR_NO_MESH */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"ERROR_NO_MESH\", function() { return ERROR_NO_MESH; });\n\nconst ERROR_NO_MESH = (entity) => new Error(`No Mesh found on entity.\\n\\t${entity}`);\n\n\n//# sourceURL=webpack:///./src/consts/error.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"Key\", function() { return Key; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"KEY_MAP\", function() { return KEY_MAP; });\n\n// Define all known keys.\nconst Key = {\n  Jump: 'Key.Jump',\n  Forward: 'Key.Forward',\n  Backward: 'Key.Backward',\n};\n\n/**\n * Map key codes to our custom keys\n */\nconst KEY_MAP = {\n  ArrowUp: Key.Jump,\n  KeyW: Key.Jump,\n  KeyD: Key.Forward,\n  ArrowRight: Key.Forward,\n  KeyA: Key.Backward,\n  ArrowLeft: Key.Backward,\n};\n\n\n//# sourceURL=webpack:///./src/consts/key_map.js?");
 
 /***/ }),
 
@@ -266,43 +220,31 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _anim_mixer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../anim-mixer */ \"../../anim-mixer/index.js\");\n/* harmony import */ var _anim_mixer__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_anim_mixer__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _gltf_model_2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../gltf-model-2 */ \"../../gltf-model-2/index.js\");\n/* harmony import */ var _gltf_model_2__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_gltf_model_2__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _collision_aabb__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../collision-aabb */ \"../../collision-aabb/index.js\");\n/* harmony import */ var _camera_orbit__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../camera-orbit */ \"../../camera-orbit/index.js\");\n/* harmony import */ var _input__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../input */ \"../../input/index.js\");\n/* harmony import */ var _components_user_controls__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/user-controls */ \"./src/components/user-controls.js\");\n/* harmony import */ var _components_pickup_able__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/pickup-able */ \"./src/components/pickup-able.js\");\n/* harmony import */ var _components_pickup_able__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_components_pickup_able__WEBPACK_IMPORTED_MODULE_6__);\n/* harmony import */ var _systems_click_to_select__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./systems/click-to-select */ \"./src/systems/click-to-select.js\");\n/* harmony import */ var _components_click_to_select__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/click-to-select */ \"./src/components/click-to-select.js\");\n/* harmony import */ var _components_click_to_select__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_components_click_to_select__WEBPACK_IMPORTED_MODULE_8__);\n/* harmony import */ var _components_boxTest__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/boxTest */ \"./src/components/boxTest.js\");\n/* harmony import */ var _components_boxTest__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_components_boxTest__WEBPACK_IMPORTED_MODULE_9__);\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n// Testing Components\n\n\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _anim_mixer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../anim-mixer */ \"../../anim-mixer/index.js\");\n/* harmony import */ var _anim_mixer__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_anim_mixer__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _gltf_model_2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../gltf-model-2 */ \"../../gltf-model-2/index.js\");\n/* harmony import */ var _gltf_model_2__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_gltf_model_2__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _collision_aabb__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../collision-aabb */ \"../../collision-aabb/index.js\");\n/* harmony import */ var _input__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../input */ \"../../input/index.js\");\n/* harmony import */ var _components_camera_box__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/camera-box */ \"./src/components/camera-box.js\");\n/* harmony import */ var _components_camera_box__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_components_camera_box__WEBPACK_IMPORTED_MODULE_4__);\n/* harmony import */ var _components_control_player__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/control-player */ \"./src/components/control-player.js\");\n/* harmony import */ var _systems_game__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./systems/game */ \"./src/systems/game.js\");\n\n\n\n\n\n\n\n\n\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ }),
 
-/***/ "./src/systems/click-to-select.js":
-/*!****************************************!*\
-  !*** ./src/systems/click-to-select.js ***!
-  \****************************************/
+/***/ "./src/systems/game.js":
+/*!*****************************!*\
+  !*** ./src/systems/game.js ***!
+  \*****************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _utils_getBoundingBoxFromMesh__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/getBoundingBoxFromMesh */ \"./src/utils/getBoundingBoxFromMesh.js\");\n\n/**\n * Click-to-Select allows toggling of the 'selected' entity.\n */\nAFRAME.registerSystem('click-to-select', {\n  schema: {\n    elmIndicator: { type: 'selector' },\n    offsetY: { default: 0.5 },\n    componentName: { type: 'string' },\n    propertyName: { default: 'enabled' },\n  },\n  /**\n   * Init handler. Called during scene initialization and is only run once.\n   * Systems can use this to set initial state.\n   */\n  init() {\n    this.selected = null;\n  },\n\n  /**\n   * Sets user-controls on the entity and removes it from the previous entity.\n   */\n  select(entity) {\n    const { selected } = this;\n    const {\n      elmIndicator, offsetY, componentName, propertyName,\n    } = this.data;\n\n    // Toggle the user-controls on only the selected entity\n    if (selected) {\n      selected.setAttribute(componentName, propertyName, false);\n    }\n    entity.setAttribute(componentName, propertyName, true);\n\n    // Move the indicator as a child of entity.\n    entity.object3D.add(elmIndicator.object3D);\n    // Position it above the new entity\n    const box = Object(_utils_getBoundingBoxFromMesh__WEBPACK_IMPORTED_MODULE_0__[\"getBoundingBoxFromMesh\"])(entity).max;\n    elmIndicator.object3D.position.y = box.y + offsetY;\n\n    // Set the entity as the new selected and return it\n    this.selected = entity;\n    return entity;\n  },\n});\n\n\n//# sourceURL=webpack:///./src/systems/click-to-select.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _consts_key_map__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../consts/key_map */ \"./src/consts/key_map.js\");\n\n\nAFRAME.registerSystem('game', {\n  init() {\n    const { input } = this.sceneEl.systems;\n\n    input.setKeyMap(_consts_key_map__WEBPACK_IMPORTED_MODULE_0__[\"KEY_MAP\"]);\n  },\n});\n\n\n//# sourceURL=webpack:///./src/systems/game.js?");
 
 /***/ }),
 
-/***/ "./src/utils/getBoundingBoxFromMesh.js":
-/*!*********************************************!*\
-  !*** ./src/utils/getBoundingBoxFromMesh.js ***!
-  \*********************************************/
-/*! exports provided: getBoundingBoxFromMesh */
+/***/ "./src/utils/setVelocityFromPlayerInput.js":
+/*!*************************************************!*\
+  !*** ./src/utils/setVelocityFromPlayerInput.js ***!
+  \*************************************************/
+/*! exports provided: setVelocityFromPlayerInput */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"getBoundingBoxFromMesh\", function() { return getBoundingBoxFromMesh; });\n/* harmony import */ var _consts_error__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../consts/error */ \"./src/consts/error.js\");\n\n\n/**\n * Returns the min, max Bounding Box of the Mesh geometry.\n * Returns a [Box3](https://threejs.org/docs/index.html#api/en/math/Box3)\n * @helper\n*/\nfunction getBoundingBoxFromMesh(entity) {\n  const mesh = entity.getObject3D('mesh');\n  if (!mesh) { throw Object(_consts_error__WEBPACK_IMPORTED_MODULE_0__[\"ERROR_NO_MESH\"])(mesh); }\n  const box = new THREE.Box3();\n  box.copy(mesh.geometry.boundingBox).applyMatrix4(mesh.matrixWorld);\n  return box;\n}\n\n\n//# sourceURL=webpack:///./src/utils/getBoundingBoxFromMesh.js?");
-
-/***/ }),
-
-/***/ "./src/utils/readKeysAsRocker.js":
-/*!***************************************!*\
-  !*** ./src/utils/readKeysAsRocker.js ***!
-  \***************************************/
-/*! exports provided: readKeysAsRocker */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"readKeysAsRocker\", function() { return readKeysAsRocker; });\n\n/**\n * Helper to read two keys as a rocker switch.\n * if keyA is down, return 1\n * if keyB is down, reutrn -1\n * else return 0\n*/\nfunction readKeysAsRocker(isKeyDown, keyA, keyB) {\n  if (isKeyDown(keyA)) {\n    return 1;\n  } if (isKeyDown(keyB)) {\n    return -1;\n  }\n  return 0;\n}\n\n\n//# sourceURL=webpack:///./src/utils/readKeysAsRocker.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"setVelocityFromPlayerInput\", function() { return setVelocityFromPlayerInput; });\n/* harmony import */ var _consts_key_map__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../consts/key_map */ \"./src/consts/key_map.js\");\n/* harmony import */ var _utils_readKeysAsRocker__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../utils/readKeysAsRocker */ \"../../utils/readKeysAsRocker.js\");\n\n\n\n\n\n\n/**\n * Sets velocity to match the player's inputed velocity\n*/\nfunction setVelocityFromPlayerInput(isKeyDown, velocity) {\n  // Reset the velocity back to 0\n  velocity.set(0, 0, 0);\n\n  velocity.x = Object(_utils_readKeysAsRocker__WEBPACK_IMPORTED_MODULE_1__[\"readKeysAsRocker\"])(isKeyDown, _consts_key_map__WEBPACK_IMPORTED_MODULE_0__[\"Key\"].Forward, _consts_key_map__WEBPACK_IMPORTED_MODULE_0__[\"Key\"].Backward);\n\n  if (isKeyDown(_consts_key_map__WEBPACK_IMPORTED_MODULE_0__[\"Key\"].Jump)) {\n    velocity.y = -1;\n  }\n}\n\n\n//# sourceURL=webpack:///./src/utils/setVelocityFromPlayerInput.js?");
 
 /***/ })
 

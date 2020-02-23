@@ -12,7 +12,6 @@
 <body>
   <a-scene
     background="color: #ECECEC;"
-    collision="renderBox: false;"
     >
     <a-assets>
 
@@ -20,23 +19,53 @@
 
 
     <a-entity id="player"
-      anim-mixer
-      gltf-model-2="#model"
-      position="0 0 -5" rotation="0 180 0"
-      user-controls="enabled: true;"
-      collision="size: 1 3 1; offset: 0 0 0;"
+      position="0 2.7 -3" rotation="0 0 0"
+      geometry="primitive: cylinder; height: 1.8; radius: 0.7;"
+      material="color: #FF851B;"
+      collision
+      control-player=""
+      shadow
       >
     </a-entity>
 
 
-    <a-entity id="rig-camera">
+    <a-entity id="rig-camera" position="0 1 2" rotation="-14 0 0" camera-box="target: #player;" >
       <a-camera id="camera" wasd-controls-enabled="false"></a-camera>
+    </a-entity>
+
+
+    <a-entity class="floor" position="0 0.5 -3">
+      <a-entity
+        geometry="primitive: box; width: 1; height: 1; depth: 1"
+        material="color: blue;"
+        collision
+        >
+      </a-entity>
+
+      <a-entity
+        position="2 0 0"
+        geometry="primitive: box; width: 1; height: 1; depth: 1"
+        material="color: blue;"
+        collision
+        >
+      </a-entity>
+
+      <a-entity
+        position="-3 0 0"
+        geometry="primitive: box; width: 1; height: 1; depth: 1"
+        material="color: blue;"
+        collision
+        >
+      </a-entity>
     </a-entity>
 
 
     <a-plane rotation="-90 0 0" width="24" height="20" scale="2.2 2 1"
       position="-3 0 -14"
-      color="#7BC8A4">
+      color="#7BC8A4"
+      collision
+      shadow
+      >
     </a-plane>
   </a-scene>
 </body>
