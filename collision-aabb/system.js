@@ -62,6 +62,25 @@ AFRAME.registerSystem('collision', {
   },
 
   /**
+   * Returns all the colliding entities with this one.
+  */
+  findCollisions: () => {
+    const box = new THREE.Box3();
+
+    return function findCollisions(entity, velocity) {
+      const list = [];
+      // Loop over all known boxes, check each one for collision with self.
+      for (const [el, elBox] of this.entityBoxes) {
+        if (el === entity) { continue; }
+        if (tmpBox.intersectsBox(elBox)) {
+          list.append(el);
+        }
+      }
+      return list;
+    };
+  },
+
+  /**
    * [intersect](https://threejs.org/docs/index.html#api/en/math/Box3.intersect)
    * Returns an array, [intersect, boxA, boxB]
   */
