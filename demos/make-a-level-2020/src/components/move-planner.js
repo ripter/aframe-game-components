@@ -12,7 +12,7 @@ AFRAME.registerComponent('move-planner', {
    * Components can use this to set initial state.
    */
   init() {
-    const POOL_COUNT = 3;
+    const POOL_COUNT = 6;
 
     // Create a pool boxes to use as clickable UI
     this.poolBoxes = Array(POOL_COUNT).fill().map(() => {
@@ -28,7 +28,7 @@ AFRAME.registerComponent('move-planner', {
 
     // Position the boxes in a line
     this.poolBoxes.forEach((entity, i) => {
-      entity.object3D.position.x += 1 * (i*1);
+      entity.object3D.position.x += -2 + (1 * (i*1));
     });
   },
 
@@ -76,6 +76,31 @@ AFRAME.registerComponent('move-planner', {
   remove() {
   },
 
+
+  activate(position) {
+    this.el.object3D.visible = true;
+    this.el.object3D.position.copy(position);
+  },
+
+  deactivate() {
+    this.el.object3D.visible = false;
+  },
+
+
+  handleClick: (() => {
+    const vec3 = new THREE.Vector3();
+
+    return function handleClick(iconEntity) {
+      const { game } = this.el.sceneEl.systems;
+
+      // The icon position is local, so it's also the offset we need.
+      vec3.copy(iconEntity.object3D.position);
+
+      // Submit the new position.
+      game.submitMove(vec3);
+    };
+  })(),
+
   /**
    * DOM Event handler.
    * Called when a listening event is observed.
@@ -85,8 +110,7 @@ AFRAME.registerComponent('move-planner', {
   handleEvent(event) {
     switch (event.type) {
       case 'click':
-        console.log('Planenr move clicked', event.target, event);
-        return;
+        return this.handleClick(event.target);
       default:
         console.warn(`Unhandled event type: ${event.type}`, event); // eslint-disable-line
     }
