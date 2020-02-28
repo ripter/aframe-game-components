@@ -26,11 +26,15 @@ AFRAME.registerComponent('move-planner', {
       return entity;
     });
 
+    // Position the icons in a circle around the center.
+    
+
     // Position the boxes in a line
     this.poolBoxes.forEach((entity, i) => {
       entity.object3D.position.x += -2 + (1 * (i * 1));
     });
   },
+
 
 
   /**

@@ -12,6 +12,13 @@ This is a strategy platformer! How INCONGRUOUS is that? 😁Platforming inspired
 You goal is to rescue all of the Eggs by controlling the Vikings. Each Viking has a unique ability.
 
 
+## Powers
+
+* Valkyrie - Can fly and shoot arrows.
+* Svalinn - Shield to block and act as walkable block.
+* Gleipnir - Can place ropes and carry eggs.
+
+
 
 
 ## Turn System
