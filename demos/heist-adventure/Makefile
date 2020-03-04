@@ -1,4 +1,4 @@
-.PHONY: all build clean deploy lint server
+.PHONY: all build clean deploy lint server test
 
 all: deploy server
 
@@ -10,13 +10,16 @@ clean:
 	-rm -r ./node_modules
 	-npm cache verify
 
-deploy: build lint
+deploy: build lint test
 
 lint: node_modules/
 	npx eslint --fix src/
 
 server: build
 	npx webpack-dev-server --open
+
+test:
+	npx jest
 
 node_modules/: package.json
 	npm install

@@ -1,4 +1,4 @@
-import { readKeysAsRocker } from '../utils/readKeysAsRocker';
+import { readKeysAsRocker } from '../../../../utils/readKeysAsRocker';
 
 /**
  * User Controls for the demo
@@ -68,7 +68,9 @@ AFRAME.registerComponent('user-controls', {
 
     return function readUserInput() {
       const { isKeyDown } = this;
-      const { speed, keyForward, keyBackward, keyTurnLeft, keyTurnRight } = this.data;
+      const {
+        speed, keyForward, keyBackward, keyTurnLeft, keyTurnRight,
+      } = this.data;
 
       // Reset the velocity back to 0
       velocity.set(0, 0, 0);
@@ -134,15 +136,13 @@ AFRAME.registerComponent('user-controls', {
     // TODO: Only kill the axis that would collide. Player should be able to 'slide' along a wall.
     if (isMovingNorth && isCollisionNorth) {
       velocity.z = 0;
-    }
-    else if (isMovingSouth && isCollisionSouth) {
+    } else if (isMovingSouth && isCollisionSouth) {
       velocity.z = 0;
     }
 
     if (isMovingEast && isCollisionEast) {
       velocity.z = 0;
-    }
-    else if (isMovingWest && isCollisionWest) {
+    } else if (isMovingWest && isCollisionWest) {
       velocity.z = 0;
     }
 

@@ -10,6 +10,7 @@
   "author": "Chris Richards",
   "license": "ISC",
   "dependencies": {
+    "jest": "^25.1.0",
     "lighterhtml": "^2.0.8",
     "webpack": "^4.41.4"
   },

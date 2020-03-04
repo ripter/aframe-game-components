@@ -2,16 +2,16 @@
  * Item is added to inventory when the player picks it up.
  */
 AFRAME.registerComponent('pickup-able', {
-  schema: {
-  },
+  // schema: {
+  // },
 
   /**
    * Init handler. Similar to attachedCallback.
    * Called during component initialization and is only run once.
    * Components can use this to set initial state.
    */
-  init() {
-  },
+  // init() {
+  // },
 
   /**
    * Update handler. Similar to attributeChangedCallback.
@@ -20,8 +20,8 @@ AFRAME.registerComponent('pickup-able', {
    *
    * @param {object} prevData - Previous attributes of the component.
    */
-  update(prevData) {
-  },
+  // update(prevData) {
+  // },
 
   /**
    * Tick handler.
@@ -31,8 +31,8 @@ AFRAME.registerComponent('pickup-able', {
    * @param {number} time - Scene tick time.
    * @param {number} timeDelta - Difference in current render time and previous render time.
    */
-  tick(time, timeDelta) {
-  },
+  // tick(time, timeDelta) {
+  // },
 
   /**
    * Called to start any dynamic behavior (e.g., animation, AI, events, physics).
@@ -44,8 +44,8 @@ AFRAME.registerComponent('pickup-able', {
   /**
    * Called to stop any dynamic behavior (e.g., animation, AI, events, physics).
    */
-  pause() {
-  },
+  // pause() {
+  // },
 
 
   /**
@@ -53,8 +53,8 @@ AFRAME.registerComponent('pickup-able', {
    * Called whenever component is removed from the entity (i.e., removeAttribute).
    * Components can use this to reset behavior on the entity.
    */
-  remove() {
-  },
+  // remove() {
+  // },
 
   /**
    * DOM Event handler.
