@@ -10,7 +10,7 @@ clean:
 	-rm -r ./node_modules
 	-npm cache verify
 
-deploy: build lint test
+deploy: build lint 
 
 lint: node_modules/
 	npx eslint --fix src/
