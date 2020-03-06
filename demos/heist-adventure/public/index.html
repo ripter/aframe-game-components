@@ -14,7 +14,7 @@
     game
     background="color: #ECECEC;"
     click-to-select="elmIndicator: #elmSelectIndicator; componentName: user-controls;"
-    collision="renderBox: false;"
+    collision="renderBox: true;"
     >
     <a-assets>
       <!-- Model includes alien skin texture and two animations, Idle, and Punch. -->
@@ -220,22 +220,29 @@
 
 
       <a-entity id="divider">
-        <a-entity id="door"
+        <a-entity 
           gltf-model-2="#setDoor01"
           anim-mixer="shouldPlayOnLoad: false;"
           position="6 0 -8.7"
-         ></a-entity>
+          >
+          <a-entity collision="" position="4 1 0.1" geometry="width: 1.8; height: 2; depth: 0.01" visible="false"></a-entity>
+          <a-entity collision="" position="1 1 0.1" geometry="width: 1.8; height: 2; depth: 0.01" visible="false"></a-entity>
+         </a-entity>
+
 
 
         <a-entity position="1 0 -8.7" rotation="0 0 0" gltf-model-2="#setWallInteriorGround01"></a-entity>
         <a-entity position="-4 0 -8.7" rotation="0 0 0" gltf-model-2="#setWallInteriorDoubleDoor"></a-entity>
         <a-entity position="-9 0 -8.7" rotation="0 0 0" gltf-model-2="#setWallInteriorGround01"></a-entity>
 
-        <a-entity id="door"
+        <a-entity
           gltf-model-2="#setDoor01"
           anim-mixer="shouldPlayOnLoad: false;"
           position="-14 0 -8.7"
-         ></a-entity>
+          >
+          <a-entity collision="" position="4 1 0.1" geometry="width: 1.8; height: 2; depth: 0.01" visible="false"></a-entity>
+          <a-entity collision="" position="1 1 0.1" geometry="width: 1.8; height: 2; depth: 0.01" visible="false"></a-entity>
+        </a-entity>
       </a-entity>
 
       <a-entity id="outsideWall">
