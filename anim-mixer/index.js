@@ -5,7 +5,10 @@
  */
 AFRAME.registerComponent('anim-mixer', {
   schema: {
+    // Turns on "loop", "ended" events.
     enableEvents: { default: false },
+    // Default clip to play on init
+    shouldPlayOnLoad: { default: true },
     defaultClip: { default: 'Idle' },
   },
   /**
@@ -60,9 +63,13 @@ AFRAME.registerComponent('anim-mixer', {
     const mesh = this.el.getObject3D('mesh');
     if (!armature || !mesh) { return; }
 
-    const { defaultClip } = this.data;
+    const { defaultClip, shouldPlayOnLoad } = this.data;
+    // Now that we have a Mesh and an Armature, setup the animation mixer.
     this.setupMixer();
-    this.playAction(defaultClip);
+    // Playt the default animation
+    if (shouldPlayOnLoad) {
+      this.playAction(defaultClip);
+    }
   },
 
 

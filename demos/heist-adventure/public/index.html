@@ -22,6 +22,9 @@
       <img id="skin" src="./assets/athleteFemaleBlue.png"></img>
       <img id="textureGrass" src="./assets/Fabric_10.jpg"></img>
 
+      <!-- Set with animations, like doors -->
+      <a-asset-item id="setDoor01" src="./assets/Door.01.glb"></a-asset-item>
+
       <!-- Items -->
       <a-asset-item id="itemRope01" src="./assets/set/Item_Rope_01.glb"></a-asset-item>
       <a-asset-item id="itemMaskPanda01" src="./assets/set/Item_Mask_Panda_01.glb"></a-asset-item>
@@ -128,6 +131,7 @@
 
     <a-entity id="maze" position="0 0 0" scale="2 2 2">
 
+
       <a-entity id="props">
         <a-entity id="elm" pickup-able="" position="-6 0 0" rotation="0 -90 0" gltf-model-2="#itemDuffleBag01"></a-entity>
         <a-entity position="3.36 0 -3.25" rotation="0 0 0" gltf-model-2="#itemRope01"></a-entity>
@@ -216,11 +220,22 @@
 
 
       <a-entity id="divider">
-        <a-entity position="6 0 -8.7" rotation="0 0 0" gltf-model-2="#setWallInteriorDoor01"></a-entity>
+        <a-entity id="door"
+          gltf-model-2="#setDoor01"
+          anim-mixer="shouldPlayOnLoad: false;"
+          position="6 0 -8.7"
+         ></a-entity>
+
+
         <a-entity position="1 0 -8.7" rotation="0 0 0" gltf-model-2="#setWallInteriorGround01"></a-entity>
         <a-entity position="-4 0 -8.7" rotation="0 0 0" gltf-model-2="#setWallInteriorDoubleDoor"></a-entity>
         <a-entity position="-9 0 -8.7" rotation="0 0 0" gltf-model-2="#setWallInteriorGround01"></a-entity>
-        <a-entity position="-14 0 -8.7" rotation="0 0 0" gltf-model-2="#setWallInteriorDoor01"></a-entity>
+
+        <a-entity id="door"
+          gltf-model-2="#setDoor01"
+          anim-mixer="shouldPlayOnLoad: false;"
+          position="-14 0 -8.7"
+         ></a-entity>
       </a-entity>
 
       <a-entity id="outsideWall">
