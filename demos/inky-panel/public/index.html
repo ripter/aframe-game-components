@@ -14,12 +14,47 @@
   <a-scene background="color: #7FDBFF;">
     <a-assets>
       <a-asset-item id="storyFogg" src="assets/Monsieur_Fogg.json"></a-asset-item>
+      <a-asset-item id="modelCharacter" src="./assets/character.glb"></a-asset-item>
+      <img id="skinA" src="./assets/fantasyFemaleA.png"></img>
+      <img id="skinB" src="./assets/fantasyFemaleB.png"></img>
     </a-assets>
 
     <a-entity inky-panel="storyFile: #storyFogg;">
-      <a-plane position="0 2 -2" width="1" height="1" color="#001f3f"></a-plane>
+      <a-plane position="0 1 -1" width="1" height="1" color="#001f3f">
+        <a-entity
+          position="0.0508 0.3 0"
+          inky-panel-text
+          text="value: Hello VR World;"
+          >
+        </a-entity>
+
+        <a-entity
+          position="0.0508 -0.0508 0.0508"
+          inky-panel-choice-list
+          >
+        </a-entity>
+      </a-plane>
+
     </a-entity>
 
+
+    <a-entity id="rig-camera" wasd-controls >
+      <a-camera id="camera">
+        <a-entity laser-controls="hand: right;"></a-entity>
+        <a-entity cursor="rayOrigin: mouse;"
+          raycaster="objects: .clickable"
+          >
+        </a-entity>
+      </a-camera>
+    </a-entity>
+
+    <a-entity
+      id="modal"
+      anim-mixer
+      position="-0.79 0 -2"
+      gltf-model-2="#modelCharacter"
+      material="src: #skinB;"
+      ></a-entity>
 
 
     <a-plane rotation="-90 0 0" width="24" height="20"
