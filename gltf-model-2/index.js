@@ -1,5 +1,5 @@
 /**
- * Patched version of gltf-model that sets 'mesh' to the SkinnedMesh or root object.
+ * Version of gltf-model that sets 'mesh' to the frist SkinnedMesh, Mesh or root object.
  * sets `mesh` and `armature` references
  * `setObject3D('mesh', SkinnedMesh || Mesh)`
  * `setObject3D('armature', {Object3D animations=[]})`
