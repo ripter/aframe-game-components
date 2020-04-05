@@ -8,7 +8,7 @@
   <script src="./libs/aframe-v1.0.4.min.js"></script>
   <script src="./libs/ink.0.9.0.js"></script>
   <script src="./bundle.js"></script>
-  <title>Inky Panel Component [A-FRAME 1.0.4]</title>
+  <title>Inky 80's Hacker [A-FRAME 1.0.4]</title>
 </head>
 <body>
   <a-scene background="color: #7FDBFF;">
@@ -21,21 +21,35 @@
       <img id="skinB" src="./assets/fantasyFemaleB.png"></img>
     </a-assets>
 
-    <a-entity id="elScreen" inky-panel="storyFile: #storyFogg;" match-mesh="src: #room; name: ComputerOldScreen001;">
-      <a-plane position="0 1 -1" width="1" height="1" color="#001f3f">
+
+    <a-entity
+      position="1.083 0.663 -0.053"
+      rotation="0 180 0"
+      gltf-model="#modelComputer"
+      match-mesh="target: #elScreen; meshName: targetScreen;"
+      >
+      <a-entity
+        id="elScreen"
+        geometry="primitive: plane; height: 1; width: 1"
+        material="side: double; color: #001f3f;"
+        inky-panel="storyFile: #storyFogg;"
+        >
+
         <a-entity
+          rotation="0 90 0"
           position="0.0508 0.3 0"
           inky-panel-text
-          text="value: Hello VR World;"
+          text="value: Hello VR World; side: both;"
           >
         </a-entity>
 
         <a-entity
+          rotation="0 90 0"
           position="0.0508 -0.0508 0.0508"
           inky-panel-choice-list
           >
         </a-entity>
-      </a-plane>
+      </a-entity>
 
     </a-entity>
 
@@ -47,7 +61,6 @@
         >
       </a-entity>
     </a-camera>
-
 
 
     <a-plane rotation="-90 0 0" width="24" height="20"
