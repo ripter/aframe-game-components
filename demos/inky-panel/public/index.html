@@ -15,6 +15,7 @@
     <a-assets>
       <a-asset-item id="storyFogg" src="assets/Monsieur_Fogg.json"></a-asset-item>
       <a-asset-item id="modelCharacter" src="./assets/character.glb"></a-asset-item>
+      <a-asset-item id="modelRoom" src="./assets/hacker_room.glb"></a-asset-item>
       <img id="skinA" src="./assets/fantasyFemaleA.png"></img>
       <img id="skinB" src="./assets/fantasyFemaleB.png"></img>
     </a-assets>
@@ -38,15 +39,13 @@
     </a-entity>
 
 
-    <a-entity id="rig-camera" wasd-controls >
-      <a-camera id="camera">
-        <a-entity laser-controls="hand: right;"></a-entity>
-        <a-entity cursor="rayOrigin: mouse;"
-          raycaster="objects: .clickable"
-          >
-        </a-entity>
-      </a-camera>
-    </a-entity>
+    <a-camera id="camera" wasd-controls>
+      <a-entity laser-controls="hand: right;"></a-entity>
+      <a-entity cursor="rayOrigin: mouse;"
+        raycaster="objects: .clickable"
+        >
+      </a-entity>
+    </a-camera>
 
     <a-entity
       id="modal"
@@ -62,6 +61,21 @@
       color="#3D9970"
       >
     </a-plane>
+
+
+
+    <a-plane id="guardianZone"
+      rotation="-90 0 0" width="1.5" height="1.5"
+      position="0 0.0254 0"
+      color="red"
+      >
+    </a-plane>
+
+    <a-entity
+      position="-0.4 0 0.04"
+      gltf-model-2="#modelRoom"
+    >
+    </a-entity>
   </a-scene>
 </body>
 </html>
