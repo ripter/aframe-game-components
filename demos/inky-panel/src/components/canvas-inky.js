@@ -4,11 +4,10 @@ const { Story } = inkjs; // inkjs loaded via script tag as iife
 /**
  * Runs a [Ink](https://github.com/inkle/ink) story as a component.
  */
-AFRAME.registerComponent('material-inky', {
+AFRAME.registerComponent('canvas-inky', {
   schema: {
     storyFile: { type: 'selector' },
-    // backgroundColor: { default: '#001f3f' },
-    // choiceHeight: { default: 0.0254 * 2 },
+    canvas: { type: 'selector' },
   },
 
   /**
@@ -17,31 +16,6 @@ AFRAME.registerComponent('material-inky', {
    * Components can use this to set initial state.
    */
   init() {
-    // Create a Canvas to use.
-    // const canvas = document.createElement('canvas');
-    // canvas.id = 'testYo';
-    // canvas.width = 150;
-    // canvas.height = 150;
-    // canvas.crossorigin = 'anonymous';
-    // canvas.setAttribute('crossorigin', 'anonymous');
-    // document.body.appendChild(canvas);
-    // this.el.setAttribute('material', {src: '#testYo'});
-
-    // const canvas = document.getElementById('inkCanvas')
-    // const ctx = this.ctx = canvas.getContext('2d');
-    // console.log('ctx', ctx, canvas);
-    //
-    // ctx.fillStyle = 'rgb(200, 0, 0)';
-    // ctx.fillRect(10, 10, 50, 50);
-    //
-    // ctx.fillStyle = 'rgba(0, 0, 200, 0.5)';
-    // ctx.fillRect(30, 30, 50, 50);
-
-    // ctx.fillStyle = '#FF851B'; //'rgb(200, 0, 0)';
-    // ctx.fillRect(0, 0, 50, 50);
-    // ctx.fillStyle = 'rgba(0, 0, 200, 0.5)';
-    // ctx.fillRect(30, 30, 50, 50);
-
   },
 
   /**
@@ -53,24 +27,15 @@ AFRAME.registerComponent('material-inky', {
    */
   update(prevData) {
     if (this.data.storyFile === prevData.storyFile) { return; }
-    const mesh = this.el.getObject3D('mesh');
-    if (!mesh) { return; }
-    console.log('update called', this.el);
-    window.mesh = mesh;
-
-    const canvas = document.getElementById('inkCanvas')
-    // mesh.material.map = new THREE.CanvasTexture(canvas);
+    if (!this.data.canvas) { return; }
+    const { canvas } = this.data;
     const ctx = this.ctx = canvas.getContext('2d');
-    console.log('ctx', ctx, canvas);
 
     ctx.fillStyle = 'rgb(200, 0, 0)';
-    ctx.fillRect(10, 10, 50, 50);
+    ctx.fillRect(0, 0, 50, 50);
 
     ctx.fillStyle = 'rgba(0, 0, 200, 0.5)';
     ctx.fillRect(30, 30, 50, 50);
-
-
-
   },
 
 
@@ -81,21 +46,22 @@ AFRAME.registerComponent('material-inky', {
    * @return {undefined}
    */
   handleEvent(event) {
-    const { story } = this;
-    console.log('event', event.type, event.target);
-    switch (event.type) {
-      case 'click':
-        // Story choice!
-        cosnole.log('Choice Click', event.target);
-        // const choiceIndex = event.target.dataset.choiceIndex;
-        // const choice = story.currentChoices[choiceIndex];
-        // console.log('choice', choice);
-        // story.ChooseChoiceIndex(choiceIndex);
-        // this.renderStory();
-        break;
-      default:
-        console.warn(`Unhandled event type: ${event.type}`, event); // eslint-disable-line
-    }
+    this.update();
+    // const { story } = this;
+    // console.log('event', event.type, event.target);
+    // switch (event.type) {
+    //   case 'click':
+    //     // Story choice!
+    //     cosnole.log('Choice Click', event.target);
+    //     // const choiceIndex = event.target.dataset.choiceIndex;
+    //     // const choice = story.currentChoices[choiceIndex];
+    //     // console.log('choice', choice);
+    //     // story.ChooseChoiceIndex(choiceIndex);
+    //     // this.renderStory();
+    //     break;
+    //   default:
+    //     console.warn(`Unhandled event type: ${event.type}`, event); // eslint-disable-line
+    // }
   },
 
   renderStory() {

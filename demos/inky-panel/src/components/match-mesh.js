@@ -38,21 +38,6 @@ AFRAME.registerComponent('match-mesh', {
     targetMesh.quaternion.copy(mesh.quaternion);
     targetMesh.scale.copy(mesh.scale);
 
-    window.targetMesh = targetMesh;
-
-//     console.log('arg');
-// targetMesh.material.needsUpdate = true;
-// targetMesh.geometry.attributes.position.needsUpdate = true;
-// targetMesh.geometry.verticesNeedUpdate = true;
-// targetMesh.geometry.elementsNeedUpdate = true;
-// targetMesh.geometry.morphTargetsNeedUpdate = true;
-// targetMesh.geometry.uvsNeedUpdate = true;
-// targetMesh.geometry.normalsNeedUpdate = true;
-// targetMesh.geometry.colorsNeedUpdate = true;
-// targetMesh.geometry.tangentsNeedUpdate = true;
-
-
-
     // Turn off the mesh we are copying.
     mesh.visible = false;
   },
