@@ -24,6 +24,18 @@ AFRAME.registerComponent('canvas-inky', {
    * Components can use this to set initial state.
    */
   init() {
+    this.lines = [
+      '1ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+      '2abcdefghijklmnopqrstuvwxyz',
+      '3ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+      '4abcdefghijklmnopqrstuvwxyz',
+      '5ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+      '6abcdefghijklmnopqrstuvwxyz',
+      '7ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+      '8abcdefghijklmnopqrstuvwxyz',
+      '9ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+      '10bcdefghijklmnopqrstuvwxyz',
+    ];
   },
 
   /**
@@ -39,6 +51,11 @@ AFRAME.registerComponent('canvas-inky', {
     const { canvas, fontSize, fontFamily } = this.data;
     const ctx = this.ctx = canvas.getContext('2d');
 
+    if (this.data.storyFile !== prevData.storyFile) {
+
+      this.renderStory();
+    }
+
     // clear screen by re-drawing background.
     ctx.fillStyle = this.data.backgroundColor;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -46,18 +63,7 @@ AFRAME.registerComponent('canvas-inky', {
     // Draw the text.
     ctx.fillStyle = this.data.color;
     ctx.font = `${fontSize}px ${fontFamily}`;
-    [
-      '1ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-      '2abcdefghijklmnopqrstuvwxyz',
-      '3ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-      '4abcdefghijklmnopqrstuvwxyz',
-      '5ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-      '6abcdefghijklmnopqrstuvwxyz',
-      '7ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-      '8abcdefghijklmnopqrstuvwxyz',
-      '9ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-      '10bcdefghijklmnopqrstuvwxyz',
-    ].forEach((line, i) => {
+    this.lines.forEach((line, i) => {
       ctx.fillText(line, 0, fontSize * (i+1));
     });
   },
@@ -89,39 +95,46 @@ AFRAME.registerComponent('canvas-inky', {
   },
 
   renderStory() {
-    const { elText, elChoiceList, story } = this;
-    const { choiceHeight } = this.data;
+    const { elText, elChoiceList } = this;
+    const { choiceHeight, storyFile } = this.data;
+
+    this.lines = [];
+    const story = this.story = new Story(storyFile.data);
+    console.log('story', this.story);
+    while (story.canContinue) {
+      this.lines.push(story.Continue());
+    }
 
     // Get the full text and display it.
-    this.storyBody = story.ContinueMaximally();
-    elText.setAttribute('text', {value: this.storyBody});
+    // this.storyBody = story.ContinueMaximally();
+    // elText.setAttribute('text', {value: this.storyBody});
 
     // Remove any old children
-    elChoiceList.getChildren().forEach(item => item.remove());
+    // elChoiceList.getChildren().forEach(item => item.remove());
     // elChoiceList.children.forEach(item => item.remove());
 
 
     // Render the choices
-    story.currentChoices.forEach((choice, index) => {
-      const elChoice = document.createElement('a-entity');
-      console.log('choice', choice);
-      elChoice.setAttribute('text', {value: choice.text});
-      elChoice.setAttribute('geometry', {primitive: 'plane', height: choiceHeight, width: 1});
-      // elChoice.setAttribute('material', 'color: #FFDC00;');
-      elChoice.object3D.position.y = -1 * index * choiceHeight;
-
-      elChoice.dataset.choiceIndex = index;
-      elChoice.classList.add('clickable');
-      elChoice.addEventListener('click', this);
-      // elChoice.onclick = (evt) => {
-      //   console.log('Click bitch', evt);
-      // }
-      // elChoice.addEventListener('click', (evt) => {
-      //   console.log('Click bitch, two', evt);
-      // });
-
-      elChoiceList.appendChild(elChoice);
-    });
+    // story.currentChoices.forEach((choice, index) => {
+    //   const elChoice = document.createElement('a-entity');
+    //   console.log('choice', choice);
+    //   elChoice.setAttribute('text', {value: choice.text});
+    //   elChoice.setAttribute('geometry', {primitive: 'plane', height: choiceHeight, width: 1});
+    //   // elChoice.setAttribute('material', 'color: #FFDC00;');
+    //   elChoice.object3D.position.y = -1 * index * choiceHeight;
+    //
+    //   elChoice.dataset.choiceIndex = index;
+    //   elChoice.classList.add('clickable');
+    //   elChoice.addEventListener('click', this);
+    //   // elChoice.onclick = (evt) => {
+    //   //   console.log('Click bitch', evt);
+    //   // }
+    //   // elChoice.addEventListener('click', (evt) => {
+    //   //   console.log('Click bitch, two', evt);
+    //   // });
+    //
+    //   elChoiceList.appendChild(elChoice);
+    // });
 
 
   },
