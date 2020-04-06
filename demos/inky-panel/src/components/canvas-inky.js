@@ -8,6 +8,14 @@ AFRAME.registerComponent('canvas-inky', {
   schema: {
     storyFile: { type: 'selector' },
     canvas: { type: 'selector' },
+    backgroundColor: { default: '#0074D9' },
+    color: { default: '#7FDBFF' },
+    fontFamily: { default: 'monospace' },
+    // fontFamily: { default: '' },
+    // fontFamily: { default: 'mozillavr' },
+    // fontFamily: { default: 'https://cdn.aframe.io/fonts/mozillavr.fnt' },
+    // https://cdn.aframe.io/fonts/mozillavr.fnt
+    fontSize: { default: 20 },
   },
 
   /**
@@ -28,21 +36,30 @@ AFRAME.registerComponent('canvas-inky', {
   update(prevData) {
     if (this.data.storyFile === prevData.storyFile) { return; }
     if (!this.data.canvas) { return; }
-    const { canvas } = this.data;
+    const { canvas, fontSize, fontFamily } = this.data;
     const ctx = this.ctx = canvas.getContext('2d');
 
-    // ctx.fillStyle = 'rgb(200, 0, 0)';
-    ctx.fillStyle = '#0074D9'; // blue
-    ctx.fillRect(0, 0, 50, 50);
+    // clear screen by re-drawing background.
+    ctx.fillStyle = this.data.backgroundColor;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // ctx.fillStyle = 'rgba(0, 0, 200, 0.5)';
-    ctx.fillStyle = '#FF851B'; // orange
-    ctx.fillRect(78, 78, 50, 50);
-
-    ctx.fillStyle = 'black';
-    ctx.font = "20px Georgia";
-    ctx.fillText("Hello World!", 10, 50);
-    ctx.font = "30px Verdana";
+    // Draw the text.
+    ctx.fillStyle = this.data.color;
+    ctx.font = `${fontSize}px ${fontFamily}`;
+    [
+      '1ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+      '2abcdefghijklmnopqrstuvwxyz',
+      '3ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+      '4abcdefghijklmnopqrstuvwxyz',
+      '5ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+      '6abcdefghijklmnopqrstuvwxyz',
+      '7ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+      '8abcdefghijklmnopqrstuvwxyz',
+      '9ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+      '10bcdefghijklmnopqrstuvwxyz',
+    ].forEach((line, i) => {
+      ctx.fillText(line, 0, fontSize * (i+1));
+    });
   },
 
 
