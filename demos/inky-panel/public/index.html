@@ -31,30 +31,16 @@
       <a-entity
         id="elScreen"
         geometry="primitive: plane; height: 1; width: 1"
-        material="side: double; color: #001f3f;"
-        inky-panel="storyFile: #storyFogg;"
+        material-inky="storyFile: #storyFogg;"
+        material="src: #inkCanvas; side: double;"
         >
 
-        <a-entity
-          position="0.0508 0.3 0"
-          inky-panel-text
-          text="value: Hello VR World; side: both;"
-          >
-        </a-entity>
-
-        <a-entity
-          rotation="0 90 0"
-          position="0.0508 -0.0508 0.0508"
-          inky-panel-choice-list
-          >
-        </a-entity>
       </a-entity>
 
     </a-entity>
 
 
-    <a-camera id="camera" wasd-controls>
-      <a-entity laser-controls="hand: right;"></a-entity>
+    <a-camera id="camera" wasd-controls camera>
       <a-entity cursor="rayOrigin: mouse;"
         raycaster="objects: .clickable"
         >
@@ -75,5 +61,7 @@
     >
     </a-entity>
   </a-scene>
+
+  <canvas id="inkCanvas" crossorigin="anonymous" width="128" height="128"></canvas>
 </body>
 </html>
