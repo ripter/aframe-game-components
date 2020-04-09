@@ -1,6 +1,5 @@
 const { Story } = inkjs; // inkjs loaded via script tag as iife
 
-// console.log('Story Loaded', Story);
 /**
  * Runs a [Ink](https://github.com/inkle/ink) story as a component.
  */
@@ -11,10 +10,6 @@ AFRAME.registerComponent('canvas-inky', {
     backgroundColor: { default: '#0074D9' },
     color: { default: '#7FDBFF' },
     fontFamily: { default: 'monospace' },
-    // fontFamily: { default: '' },
-    // fontFamily: { default: 'mozillavr' },
-    // fontFamily: { default: 'https://cdn.aframe.io/fonts/mozillavr.fnt' },
-    // https://cdn.aframe.io/fonts/mozillavr.fnt
     fontSize: { default: 20 },
   },
 
@@ -52,7 +47,6 @@ AFRAME.registerComponent('canvas-inky', {
     const ctx = this.ctx = canvas.getContext('2d');
 
     if (this.data.storyFile !== prevData.storyFile) {
-
       this.renderStory();
     }
 
@@ -105,15 +99,6 @@ AFRAME.registerComponent('canvas-inky', {
       this.lines.push(story.Continue());
     }
 
-    // Get the full text and display it.
-    // this.storyBody = story.ContinueMaximally();
-    // elText.setAttribute('text', {value: this.storyBody});
-
-    // Remove any old children
-    // elChoiceList.getChildren().forEach(item => item.remove());
-    // elChoiceList.children.forEach(item => item.remove());
-
-
     // Render the choices
     // story.currentChoices.forEach((choice, index) => {
     //   const elChoice = document.createElement('a-entity');
@@ -135,7 +120,5 @@ AFRAME.registerComponent('canvas-inky', {
     //
     //   elChoiceList.appendChild(elChoice);
     // });
-
-
   },
 });
