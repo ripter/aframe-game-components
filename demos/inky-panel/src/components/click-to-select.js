@@ -25,8 +25,7 @@ AFRAME.registerComponent('click-to-select', {
   handleEvent(event) {
     switch (event.type) {
       case 'click':
-        // this.system.select(this.el);
-        console.log('CLICKED ME');
+        this.system.select(this.el);
         break;
       default:
         console.warn(`Unhandled event type: ${event.type}`, event, this); // eslint-disable-line

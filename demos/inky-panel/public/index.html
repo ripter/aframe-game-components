@@ -23,23 +23,40 @@
 
 
       <!--
+        canvas-inky="storyFile: #storyFogg; canvas: #inkCanvas;"
+        inky-panel="storyFile: #storyFogg;"
+      match-mesh="target: #elScreen; meshName: targetScreen;"
+        inky-panel="storyFile: #storyFogg;"
+        material="src: #inkCanvas; side: double;"
+        match-mesh="target: #elScreen; meshName: targetScreen;"
       -->
     <a-entity
       position="0.48 0.663 -0.053"
       rotation="0 180 0"
       gltf-model="#modelComputer"
-      match-mesh="target: #elScreen; meshName: targetScreen;"
       >
       <a-entity
         id="elScreen"
-        geometry="primitive: plane; height: 1; width: 1"
-        canvas-inky="storyFile: #storyFogg; canvas: #inkCanvas;"
-        material="src: #inkCanvas; side: double;"
         >
-
+        <a-entity
+          rotation="-23 90 0"
+          position="-0.03505 0.31417 0.07645"
+          geometry="primitive: plane; height: 0.22946; width: 0.26352"
+          material="color: #0074D9;"
+          inky-panel="storyFile: #storyFogg;"
+          >
+        </a-entity>
       </a-entity>
 
+      <!-- <a-entity inky-panel="storyFile: #storyFogg; choiceHeight: 0.051"
+      geometry="primitive: plane"
+      text="value: Hello World"
+      rotation="-23.054102802678933 90.00021045914971 0" position="-0.03505 0.31417 0.07645" scale="0.26352 0.22946 1">
+        </a-entity> -->
+
     </a-entity>
+
+    <!-- <a-entity text="value: Hello World;"></a-entity> -->
 
 
     <a-camera id="camera" wasd-controls camera>

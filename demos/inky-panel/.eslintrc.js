@@ -10,6 +10,7 @@ module.exports = {
   globals: {
     THREE: 'readonly',
     AFRAME: 'readonly',
+    inkjs: 'readonly',
   },
   // parserOptions: {
   //   ecmaVersion: 2018,

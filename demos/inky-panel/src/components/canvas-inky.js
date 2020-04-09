@@ -58,7 +58,7 @@ AFRAME.registerComponent('canvas-inky', {
     ctx.fillStyle = this.data.color;
     ctx.font = `${fontSize}px ${fontFamily}`;
     this.lines.forEach((line, i) => {
-      ctx.fillText(line, 0, fontSize * (i+1));
+      ctx.fillText(line, 0, fontSize * (i + 1));
     });
   },
 
@@ -69,7 +69,7 @@ AFRAME.registerComponent('canvas-inky', {
    * @param  {Event} event the event that has been fired and needs to be processed.
    * @return {undefined}
    */
-  handleEvent(event) {
+  handleEvent() {
     this.update();
     // const { story } = this;
     // console.log('event', event.type, event.target);
@@ -89,12 +89,10 @@ AFRAME.registerComponent('canvas-inky', {
   },
 
   renderStory() {
-    const { elText, elChoiceList } = this;
-    const { choiceHeight, storyFile } = this.data;
+    const { storyFile } = this.data;
 
     this.lines = [];
     const story = this.story = new Story(storyFile.data);
-    console.log('story', this.story);
     while (story.canContinue) {
       this.lines.push(story.Continue());
     }

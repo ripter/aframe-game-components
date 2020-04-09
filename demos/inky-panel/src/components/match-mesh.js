@@ -23,7 +23,7 @@ AFRAME.registerComponent('match-mesh', {
    *
    * @param {object} prevData - Previous attributes of the component.
    */
-  update(prevData) {
+  update(/* prevData */) {
     const { target, meshName } = this.data;
     if (!target || !meshName) { return; }
     const mesh = this.el.object3D.getObjectByName(meshName);
@@ -48,7 +48,7 @@ AFRAME.registerComponent('match-mesh', {
    * @param  {Event} event the event that has been fired and needs to be processed.
    * @return {undefined}
    */
-  handleEvent(event) {
+  handleEvent(/* event */) {
     this.update();
   },
 });
