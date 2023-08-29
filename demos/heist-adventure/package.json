@@ -12,7 +12,7 @@
   "dependencies": {
     "jest": "^29.6.4",
     "lighterhtml": "^2.0.8",
-    "webpack": "^5.75.0"
+    "webpack": "^5.76.0"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.3",
