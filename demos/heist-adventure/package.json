@@ -20,6 +20,6 @@
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.19.1",
     "webpack-cli": "^5.0.1",
-    "webpack-dev-server": "^3.10.1"
+    "webpack-dev-server": "^5.0.4"
   }
 }
