@@ -20,6 +20,6 @@
   },
   "devDependencies": {
     "eslint-plugin-import": "^2.20.1",
-    "webpack": "^5.76.0"
+    "webpack": "^5.94.0"
   }
 }
