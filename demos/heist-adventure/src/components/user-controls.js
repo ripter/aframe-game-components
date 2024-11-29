@@ -58,7 +58,6 @@ AFRAME.registerComponent('user-controls', {
     el.object3D.translateZ(velocity.z);
   },
 
-
   /**
    * Reads isKeyDown to create velocity and rotation values.
   */
@@ -124,13 +123,11 @@ AFRAME.registerComponent('user-controls', {
     const isMovingNorth = velocityWorld.z < 0;
     const isMovingSouth = velocityWorld.z > 0;
 
-
     // Figure out which direction the collision is on.
     const isCollisionSouth = boxA.min.z < boxB.min.z;
     const isCollisionNorth = boxA.max.z > boxB.max.z;
     const isCollisionEast = boxA.min.x < boxB.min.x;
     const isCollisionWest = boxA.max.x > boxB.max.x;
-
 
     // Don't allow moving into the collision.
     // TODO: Only kill the axis that would collide. Player should be able to 'slide' along a wall.

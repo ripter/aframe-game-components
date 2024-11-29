@@ -11,6 +11,5 @@ import './systems/game';
 import './systems/click-to-select';
 import './components/click-to-select';
 
-
 // Testing Components
 import './components/boxTest';
