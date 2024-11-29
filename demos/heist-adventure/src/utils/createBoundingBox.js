@@ -1,4 +1,3 @@
-
 /**
  * Creates a Bounding box around the entity with offset.
 */

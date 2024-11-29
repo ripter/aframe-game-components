@@ -62,7 +62,6 @@ AFRAME.registerComponent('canvas-inky', {
     });
   },
 
-
   /**
    * DOM Event handler.
    * Called when a listening event is observed.

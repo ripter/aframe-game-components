@@ -47,7 +47,6 @@ AFRAME.registerComponent('pickup-able', {
   // pause() {
   // },
 
-
   /**
    * Remove handler. Similar to detachedCallback.
    * Called whenever component is removed from the entity (i.e., removeAttribute).

@@ -1,4 +1,3 @@
-
 AFRAME.registerComponent('box-test', {
   schema: {
     size: { type: 'vec3', default: { x: 1, y: 1.8, z: 1 } },
