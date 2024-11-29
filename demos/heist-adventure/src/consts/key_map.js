@@ -1,4 +1,3 @@
-
 // Define all known keys.
 export const Key = {
   Jump: 'Key.Jump',
