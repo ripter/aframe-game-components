@@ -1,6 +1,5 @@
 // import 'aframe-troika-text';
 
-
 import '../../../anim-mixer';
 import '../../../gltf-model-2';
 
